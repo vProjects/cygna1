@@ -1623,3 +1623,10 @@ border-top-right-radius: 5px;
     font-size: 14px;
     margin-bottom: 12px;
 }
+.bid_specs {
+    font-size: 12px;
+}
+.submitted_on {
+    margin-top: 10px;
+    color: #0B6121;
+}

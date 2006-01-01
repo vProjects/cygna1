@@ -36,6 +36,7 @@
 	function messageNotification()
 	{
 		var notification_div = document.getElementById('msg_notification');
+		var msg_notification_1 = document.getElementById('msg_notification_1');
 		
 		$.ajax({
 		  url: "v-includes/class.fetchData.php",
@@ -43,6 +44,7 @@
 		  data: "refData=getMsgNotification"
 		}).success(function(data) {
 		  notification_div.innerHTML = data;
+		  msg_notification_1.innerHTML = data;
 		});
 	}
 	

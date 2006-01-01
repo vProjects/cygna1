@@ -1472,6 +1472,83 @@
 		}
 		
 		/*
+		- method for getting job list by a user
+		- Auth: Dipanjan
+		*/
+		function getMyProposals($user_id)
+		{
+			//getting bid list
+			$bids = $this->manage_content->getValueMultipleCondtnDesc("bid_info","*",array("user_id","status"),array($user_id,1));
+			if(!empty($bids[0]))
+			{
+				foreach($bids as $bid)
+				{
+					//getting project details
+					$pro_details = $this->manage_content->getValue_where("project_info","*","project_id",$bid['project_id']);
+					//getting user details of project post
+					$project_user = $this->manage_content->getValue_where("user_info","*","user_id",$pro_details[0]['user_id']);
+					
+					
+					
+					echo '<div class="project_details_outline post_bid_proposal_list">
+							<div class="col-md-12 post_bid_proposal_outline">
+								<div class="row">
+									<div class="project_title_text post_bid_bidder_name col-md-6"><a href="post_bid.php?bid='.$bid['bid_id'].'">'.$pro_details[0]['title'].'</a></div>
+								</div>
+								<div class="row">
+									<div class="col-md-3 col-lg-3 col-sm-4 col-xs-4">
+										<p class="bid_specs"><span class="post_bid_info_topic"><span class="glyphicon glyphicon-euro glyph"></span> Price:</span> '.$bid['currency'].$bid['amount'].'</p>
+									</div>
+									<div class="col-md-3 col-lg-4 col-sm-4 col-xs-4">
+										<p class="bid_specs"><span class="post_bid_info_topic"><span class="glyphicon glyphicon-off glyph"></span>Time:</span> '.$bid['time_range'].'</p>
+									</div>
+									<div class="col-md-3 col-lg-3 col-sm-4 col-xs-4">
+										<p class="bid_specs"><span class="post_bid_info_topic"><span class="glyphicon glyphicon-list-alt glyph"></span> Proposals:</span> 34</p>
+									</div>
+									<div class="col-md-2 col-lg-2">
+										<p class="bid_specs"><span class="post_bid_info_topic"><span class="glyphicon glyphicon-info-sign glyph"></span> </span> Hiring</p>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-4 col-lg-4 col-sm-4 col-xs-4 submitted_on">
+										<p class="bid_specs">Submitted on: '.$bid['date'].'&nbsp&nbsp'.$bid['time'].'</p>
+									</div>
+								</div>';
+								
+					//setting job accept or decline btn
+					if($bid['awarded'] == 1 && $pro_details[0]['award_bid_id'] == $bid['bid_info'])
+					{
+						echo '<div class="col-md-6">
+									<form action="v-includes/class.formData.php" method="post">
+										<input type="hidden" name="bid" value="'.$bid['bid_id'].'" />
+										<input type="hidden" name="fn" value="'.md5('accept_award').'" />
+										<input type="submit" class="btn btn-success btn-lg" value="Accept This Job" />
+									</form>
+								</div>
+								<div class="col-md-6">
+									<form action="v-includes/class.formData.php" method="post">
+										<input type="hidden" name="bid" value="'.$bid['bid_id'].'" />
+										<input type="hidden" name="fn" value="'.md5('decline_award').'" />
+										<input type="submit" class="btn btn-danger btn-lg" value="Decline The Job" />
+									</form>
+								</div>';
+					}
+					echo '</div>
+						<div class="clearfix"></div>
+					</div>';
+				}
+			}
+			else
+			{
+				echo '<div class="profile_box_outline">
+                    	<div class="portfolio_details">
+							<div class="portfolio_part_heading">No Jobs Found</div>
+						</div>
+					</div>';
+			}
+		}
+		
+		/*
 		- method for getting bid full details
 		- Auth: Dipanjan
 		*/
@@ -2538,6 +2615,59 @@
 				echo 'No new messages.';
 			}
 		}
+
+		/*
+		 * Method to get the number
+		 * @return string
+		 * Auth Singh 
+		 */
+		 function getProposalNumber($user_id,$type)
+		 {
+		 	//initialize the table name
+		 	$table = '';
+			
+		 	if( $type == 'proposal' )
+			{
+				$table = 'bid_info';
+			}
+			if( $type == 'posted-projects' )
+			{
+				$table = 'project_info';
+			}
+
+		 	$proposals = $this->manage_content->getValue_where($table,"*","user_id",$user_id);
+			
+			if( !empty($proposals) )
+			{
+				return count($proposals);
+			}
+			else
+			{
+				return 0;	
+			}
+		 }
+
+		/*
+		 * Method to get the number
+		 * @return string
+		 * Auth Singh 
+		 */
+		 function getAwardedJobNumber($user_id,$type)
+		 {
+		 	//initialize the table name
+		 	$table = 'bid_info';
+
+		 	$jobs = $this->manage_content->getValue_where($table,"*","user_id",$user_id);
+			
+			if( !empty($jobs) )
+			{
+				return count($jobs);
+			}
+			else
+			{
+				return 0;	
+			}
+		 }
 	}
 	
 ?>

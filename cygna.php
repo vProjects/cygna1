@@ -72,6 +72,21 @@
 								<div class="clearfix"></div>
 							</div>';
 					}
+					elseif(isset($option) && $option == 'mypro')
+					{
+						echo '<div class="project_list_heading_bar">
+								<span class="pull-left">My Proposal</span>
+								<div class="clearfix"></div>
+							</div>';
+						
+						//get the proposals on the projects
+						$manageContent->getMyProposals($_SESSION['user_id']);
+						
+						echo '<div class="project_list_heading_bar bottom_pagination">
+								<div class="clearfix"></div>
+							</div>';
+					}
+					
 				?>
            
             </div>

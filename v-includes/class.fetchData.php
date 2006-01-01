@@ -369,6 +369,21 @@
 				$update = $this->manageContent->updateValueWhere("bid_info","awarded",1,"bid_id",$bid_id);
 				//update award_bid_id field in project info table
 				$upd = $this->manageContent->updateValueWhere("project_info","award_bid_id",$bid_id,"project_id",$bid_details[0]['project_id']);
+				
+				//create the variables
+				$award_id = uniqid('AWA');
+				$workroom_id = uniqid('WKRM');
+				$project_id = $bid_details[0]['project_id'];
+				$employer_id = $bid_details[0]['employer_id'];
+				$contractor_id = $bid_details[0]['contractor_id'];
+				$date = date('Y-m-h');
+				$time = date('h:i:s');
+				
+				//check whether chat id exists or not
+				
+				
+				//`(`id`, `award_id`, `project_id`, `bid_id`, `employer_id`, `contractor_id`, `is_accepted`, `status`)
+				//(`id`, `workroom_id`, `project_id`, `bid_id`, `chat_id`, `emp_user_id`, `con_user_id`, `date`, `time`, `job_status`)
 			}
 		}
 		
