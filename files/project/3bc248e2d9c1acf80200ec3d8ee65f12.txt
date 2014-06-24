@@ -1,0 +1,30 @@
+1. check the li of the tour area and members area they are different.
+2. change the red to #FF0000
+3. in the banner the stop of "handjobstop" will be red
+4. model name will be also in red and stars too
+5. the bottom caption will be between the redlines and will be centered.
+6. pagination will be same as the model directory pagination.
+7. no previous on the main page
+8. change the background of the photos to white(#ffffff)
+9. change the more updates tab to A to Z
+
+====================================================================design
+model_detail.php
+1. remove most recent and update and pagination button. Put a text.
+
+
+===================================================================fucntions 
+
+1. model_details.php
+tour area----- they only see the samples not the whole vids
+members area-----1. there will be image galleries first and then the videos.
+		 2. sort by recent date
+
+2. thumnail will be selected by the admin- he can upload the images
+
+3. members area ---- in the movie playing below the video will be random with members favourite.
+		     the first row will contain the sliced videos of the same vids
+
+
+
+3
