@@ -76,16 +76,16 @@
                         <!-- /.nav-second-level -->
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-wrench fa-fw"></i> Lorem Ipsum<span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-wrench fa-fw"></i> Manage Components<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="#">Lorem Ipsum</a>
+                                <a href="addSkills.php">Manage Skills</a>
                             </li>
                             <li>
-                                <a href="#">Lorem Ipsum</a>
+                                <a href="addCategory.php"> Manage Category</a>
                             </li>
                             <li>
-                                <a href="#">Lorem Ipsum</a>
+                                <a href="addSubCategory.php">Manage Sub-category</a>
                             </li>
                             <li>
                                 <a href="#">Lorem Ipsum</a>

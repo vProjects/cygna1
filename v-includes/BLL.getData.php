@@ -250,8 +250,9 @@
 			
 			if(!empty($userportfolios[0]))
 			{
+				$last_key = array_keys($userportfolios);
 				//getting the last number of array and initialize parameter
-				$last_key = end(array_keys($userportfolios));
+				$last_key = end($last_key);
 				$i=0;
 				
 				foreach($userportfolios as $userportfolio)
@@ -284,7 +285,8 @@
 			if(!empty($userportfolios[0]))
 			{
 				//getting the last number of array and initialize parameter
-				$last_key = end(array_keys($userportfolios));
+				$last_key = array_keys($userportfolios);
+				$last_key = end($last_key);
 				$i=0;
 				
 				foreach($userportfolios as $userportfolio)
@@ -1115,66 +1117,21 @@
 		*/
 		function getProjectCategoryList($cat,$sub)
 		{
-			if(!empty($cat))
+			$categories = $this->manage_content->getValue( 'category' ,'*');
+			
+			if( !empty($categories) )
 			{
-				if(!empty($sub))
+				foreach ($categories as $category )
 				{
-					for($i=1;$i<=7;$i++)
-					{
-						if($cat == 'Category'.$i)
-						{
-							echo '<li class="pro_cat profile_overview_active"><a href="project_list.php?cat=Category'.$i.'">Category'.$i.'</a></li>';
-							echo '<ul class="profile_overview profile_1st_child_nav">';
-							for($j=1;$j<=5;$j++)
-							{
-								if($sub == 'Sub Category '.$j)
-								{
-									echo '<li><i class="glyphicon glyphicon-chevron-right profile_ovr_icon"></i><a href="project_list.php?cat=Category'.$i.'&sub=Sub Category '.$j.'">Sub Category '.$j.'</a></li>';
-								}
-								else
-								{
-									echo '<li><i class="glyphicon glyphicon-chevron-right profile_ovr_icon"></i><a href="project_list.php?cat=Category'.$i.'&sub=Sub Category '.$j.'">Sub Category '.$j.'</a></li>';
-								}
-								
-							}
-							echo '</ul>';
-						}
-						else
-						{
-							echo '<li class="pro_cat"><a href="project_list.php?cat=Category'.$i.'">Category'.$i.'</a></li>';
-						}
-					}
-				}
-				else
-				{
-					for($i=1;$i<=7;$i++)
-					{
-						if($cat == 'Category'.$i)
-						{
-							echo '<li class="pro_cat profile_overview_active"><a href="project_list.php?cat=Category'.$i.'">Category'.$i.'</a></li>';
-							echo '<ul class="profile_overview profile_1st_child_nav">';
-							for($j=1;$j<=5;$j++)
-							{
-								echo '<li><i class="glyphicon glyphicon-chevron-right profile_ovr_icon"></i><a href="project_list.php?cat=Category'.$i.'&sub=Sub Category '.$j.'">Sub Category '.$j.'</a></li>';
-							}
-							echo '</ul>';
-						}
-						else
-						{
-							echo '<li class="pro_cat"><a href="project_list.php?cat=Category'.$i.'">Category'.$i.'</a></li>';
-						}
-					}
+					echo '<li class="pro_cat"><a href="project_list.php?cat='.$category['categoryId'].'">'.$category['name'].'</a></li>';
 				}
 			}
 			else
 			{
-				for($i=1;$i<=7;$i++)
-				{
-					echo '<li class="pro_cat"><a href="project_list.php?cat=Category'.$i.'">Category'.$i.'</a></li>';
-				}
+				echo '<li class="pro_cat"><a href="#">Sorry no category available.</a></li>';	
 			}
 		}
-		
+
 		/*
 		- method for getting project details in bid page
 		- Auth: Dipanjan

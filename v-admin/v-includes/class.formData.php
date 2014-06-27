@@ -549,6 +549,67 @@
 		}
 		
 		/*
+		- method for insert skills
+		- Auth: Anand
+		*/
+		function addSkills($data)
+		{
+			//set column name
+			$column_name = array('name');
+			$column_value = array($data['skill_name']);
+			//insert the values
+			$insert = $this->manageContent->insertValue('skills',$column_name,$column_value);
+			return $insert;
+		}
+		
+		/*
+		- method for insert Category
+		- Auth: Anand
+		*/
+		function addCategory($data)
+		{
+			
+			//set column name
+			$column_name = array('name','skills');
+			$column_value = array($data['name'],$this->_convertArrayToString($data['category_skills']));
+			//insert the values
+			$insert = $this->manageContent->insertValue('category',$column_name,$column_value);
+			return $insert;
+		}
+		
+		/*
+		- method for insert sub-Category
+		- Auth: Anand
+		*/
+		function addSubCategory($data)
+		{
+			
+			//set column name
+			$column_name = array('name','skills','categoryId');
+			$column_value = array($data['name'],$this->_convertArrayToString($data['category_skills']),$data['category']);
+			//insert the values
+			$insert = $this->manageContent->insertValue('subcategory',$column_name,$column_value);
+			return $insert;
+		}
+		
+		//function to convert array into string separated by commas
+		//auth anand
+		private function _convertArrayToString($val_array)
+		{
+			if( !empty($val_array) )
+			{
+				$val_str = "";
+				
+				foreach ($val_array as $val)
+				{
+						$val_str .= $val.",";
+				}
+				
+				return substr($val_str, 0, -1);
+			}
+		}
+		
+		/*
 		- method for setting cookie
 		- Auth: Dipanjan
 		*/
@@ -791,6 +852,52 @@
 				$_SESSION['warning'] = 'Update Unsuccessfull';
 			}
 			header("Location: ../pageList.php");
+			break;
+		}
+		//for taking action of adding skill
+		case md5('add_skill'):
+		{
+			$actionMyPage = $formData->addSkills($GLOBALS['_POST']);
+			if($actionMyPage == 1)
+			{
+				$_SESSION['success'] = 'Update Successfull';
+			}
+			else
+			{
+				$_SESSION['warning'] = 'Update Unsuccessfull';
+			}
+			header("Location: ../addSkills.php");
+			break;
+		}
+		//for taking action of adding category
+		case md5('add_category'):
+		{
+			$actionMyPage = $formData->addCategory($GLOBALS['_POST']);
+			if($actionMyPage == 1)
+			{
+				$_SESSION['success'] = 'Update Successfull';
+			}
+			else
+			{
+				$_SESSION['warning'] = 'Update Unsuccessfull';
+			}
+			header("Location: ../addCategory.php");
+			break;
+		}
+		
+		//for taking action of adding sub category
+		case md5('add_subcategory'):
+		{
+			$actionMyPage = $formData->addSubCategory($GLOBALS['_POST']);
+			if($actionMyPage == 1)
+			{
+				$_SESSION['success'] = 'Update Successfull';
+			}
+			else
+			{
+				$_SESSION['warning'] = 'Update Unsuccessfull';
+			}
+			header("Location: ../addSubCategory.php");
 			break;
 		}
 		default:

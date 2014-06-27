@@ -1741,6 +1741,78 @@
 			$time = date('h:i:s a');
 			return $time;
 		}
+		
+		/*
+		 * - method to get the skills in the system
+		 * - Creates the Full UI
+		 * - Auth singh 
+		 */
+		function getSkills()
+		{
+			$skills = $this->manage_content->getValue('skills','*');
+			foreach ($skills as $skill) {
+				echo '<button type="button" class="btn btn-info skills" readonly="readonly">'.$skill['name'].'</button>';
+			}
+		}
+
+		/*
+		 * - method to get the skills select box in the system
+		 * - Creates the Full UI
+		 * - Auth singh 
+		 */
+		function getSkillsSelect()
+		{
+			$skills = $this->manage_content->getValue('skills','*');
+			echo '<select class="form-control" multiple="multiple" name="category_skills[]">';
+			foreach ($skills as $skill) {
+				echo '<option value="'.$skill['skillId'].'">'.$skill['name'].'</option>';
+			}
+			
+			echo '</select>';
+		}
+		
+		/*
+		 * - method to get the category in the system
+		 * - Creates the Full UI
+		 * - Auth singh 
+		 */
+		function getCategorys()
+		{
+			$categorys = $this->manage_content->getValue('category','*');
+			foreach ($categorys as $category) {
+				echo '<button type="button" class="btn btn-info skills" readonly="readonly">'.$category['name'].'</button>';
+			}
+		}
+		
+		/*
+		 * - method to get the subcategory in the system
+		 * - Creates the Full UI
+		 * - Auth singh 
+		 */
+		function getSubCategorys()
+		{
+			$subcategorys = $this->manage_content->getValue('subcategory','*');
+			foreach ($subcategorys as $subcategory) {
+				echo '<button type="button" class="btn btn-info skills" readonly="readonly">'.$subcategory['name'].'</button>';
+			}
+		}
+		
+		/*
+		 * - method to get the category select box in the system
+		 * - Creates the Full UI
+		 * - Auth singh 
+		 */
+		function getCategorySelect()
+		{
+			$categorys = $this->manage_content->getValue('category','*');
+			
+			echo '<select class="form-control" name="category">';
+			foreach ($categorys as $category) {
+				echo '<option value="'.$category['categoryId'].'">'.$category['name'].'</option>';
+			}
+			
+			echo '</select>';
+		}
 	}
 	
 ?>
