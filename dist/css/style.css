@@ -428,7 +428,6 @@ a:hover{
 }
 .profile_overview li{
 	list-style-type:none;
-	padding:0.5em 0.8em;
 	cursor:pointer;
 	background-color:#fff;
 	transition:all 0.5s ease-in 0s;
@@ -438,6 +437,8 @@ a:hover{
 	font-size:1.2em;
 	font-family:PTSans;
 	transition:all 0.5s ease-in 0s;
+	padding: 0.5em 0.8em;
+	display: block;
 }
 .profile_overview li:hover{
 	background-color:#6b4cf1;
@@ -873,7 +874,7 @@ a:hover{
 	font-size:0.9em;
 }
 .post_bid_info_outline{
-	font-size:0.9em;
+	font-size: 0.7em;
 	margin-bottom:0.4em;
 	color: #696363;
 }

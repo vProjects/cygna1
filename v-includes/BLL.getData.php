@@ -2189,7 +2189,7 @@
 			}
 			else
 			{
-				echo '<li>No Running Project List</li>';
+				echo '<li><a href="#">No Running Project List</a></li>';
 			}
 		}
 		
