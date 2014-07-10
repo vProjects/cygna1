@@ -29,16 +29,8 @@
     	<div class="row profile_body_row">
         	<!-- body left section starts here -->
         	<div class="col-md-3 profile_left_part_outline">
-                <div class="profile_box_outline project_list_leftbar_outline">
-                	<div class="profile_box_heading">Quick Links</div>
-                    <ul class="profile_overview">
-                    	<li><a href="cygna.php?op=job">JobList</a></li>
-                        <li><a href="cygna.php?op=pro">ProjectList</a></li>
-                        <li><a href="message.php">Message</a></li>
-                    </ul>
-                </div>
                 <?php
-					include 'v-modules/user-running-projects.php';
+                	include 'v-modules/right-nav.php';
 				?>
 			<?php
 				include ("v-modules/polling.php");

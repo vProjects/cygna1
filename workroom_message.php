@@ -42,11 +42,21 @@
 					}
 					else
 					{
-						include 'v-modules/right-nav.php';
+						echo '<div class="profile_box_outline project_list_leftbar_outline">
+								<div class="profile_box_heading">Quick Links</div>
+								<ul class="profile_overview">
+									<li><a href="cygna.php?op=job">JobList</a></li>
+									<li><a href="cygna.php?op=pro">ProjectList</a></li>
+								</ul>
+							</div>';
 					}
-					
-					include ("v-templates/poll.php");
-				?>	
+				?>
+                <?php
+					include 'v-modules/user-running-projects.php';
+				?>
+			<?php
+				include ("v-templates/poll.php");
+			?>	
 			</div>	
 			
             <!-- body left section ends here -->
@@ -55,20 +65,9 @@
             	<div class="profile_box_outline billing_box_outline">
                 	<div class="profile_box_heading">Workroom For: PROJECT NAME</div>
                     <div class="billing_box_inner">
-                    	<div class="billing_page_heading">Your Conversation</div>
+                    	<div class="billing_page_heading">Messages</div>
                         <!-- message section starts here -->
                         <div class="message_details_outline">
-	                        <!-- input msg starts here -->
-	                        <div class="input_msg_outline">
-	                             <div class="col-md-10 col-sm-10 col-xs-10">
-	                                <textarea rows="2" class="form-control input_msg_area"></textarea>
-	                             </div>
-	                             <div class="col-md-2 col-sm-2 col-xs-2">
-	                                <div class="input_msg_submit">SEND</div>
-	                             </div>
-	                             <div class="clearfix"></div>
-	                        </div>
-	                    	<!-- input msg ends here -->
                         	<div class="chat_part_outline">
                                 <div class="col-md-2 col-sm-2 col-xs-2">
                                     <img src="img/dummy_profile.jpg" class="chat_user_image"/>
@@ -126,6 +125,18 @@
                             </div>
                         </div>
                         <!-- message section ends here -->
+                        <!-- input msg starts here -->
+                        <div class="add_message_text">Add Messages</div>
+                        <div class="input_msg_outline">
+                             <div class="col-md-10 col-sm-10 col-xs-10">
+                                <textarea rows="2" class="form-control input_msg_area"></textarea>
+                             </div>
+                             <div class="col-md-2 col-sm-2 col-xs-2">
+                                <div class="input_msg_submit">SUBMIT</div>
+                             </div>
+                             <div class="clearfix"></div>
+                        </div>
+                    	<!-- input msg ends here -->
                     </div>
                 </div>
                 <div class="clearfix"></div>

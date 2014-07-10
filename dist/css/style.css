@@ -549,7 +549,7 @@ a:hover{
 	border:2px solid #B8B8B8;
 }
 #profile_footer_outline{
-	background-color:#454341;
+	background-color: #454341;
 }
 .profile_footer_row{
 	height:100px;
@@ -703,7 +703,7 @@ a:hover{
 	color:#909090;
 }
 .input_msg_outline{
-	background-color:#3E6BC1;
+	/* background-color:#3E6BC1; */
 	padding:0.6em 0.8em;
 }
 .input_msg_area{
@@ -874,9 +874,9 @@ a:hover{
 	font-size:0.9em;
 }
 .post_bid_info_outline{
-	font-size: 0.7em;
 	margin-bottom:0.4em;
 	color: #696363;
+	font-size: 0.8em;
 }
 .post_bid_info_topic{
 	font-weight:bold;
@@ -1563,3 +1563,50 @@ border-top-right-radius: 5px;
 	}
 }
 
+.inbox-nav {
+    position: relative;
+    background: #0CE056;
+    color: #fff;
+    right: 65px;
+    top: 0;
+    padding: 5px 15px;
+    float: right;
+    font-size: 13px;
+    border-radius: 0px 0px 4px 4px;
+    box-shadow: 2px 2px 5px #414141;
+    font-weight: bold;
+    font-family: inherit;
+    margin-left: 12px;
+    transition: ease-in 0.3s all 0s;
+}
+.inbox-nav:hover {
+	background-color: #000;
+}
+.glyph {
+    font-size: 18px;
+    margin-top: 0px;
+    display: block;
+    float: left;
+    margin: -1px 12px 0 0;
+}
+.glyph-unread {
+    color: #D5CA2E;
+}
+.txt-14-1 {
+    font-size: 12px;
+    padding: 1px;
+    margin: 0;
+}
+.expand-bid {
+    border: 1px solid;
+    padding: 6px 16px 5px 11px;
+    background-color: #000;
+    color: #fff;
+    transition: ease-in 0.3s all 0s;
+    border: 1px solid #000;
+    margin-left: 2px;
+}
+.expand-bid:hover {
+	color: #454341;
+	background-color: #fff;
+}

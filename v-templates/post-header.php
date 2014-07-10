@@ -34,9 +34,12 @@
 
 <!-- header starts here -->
 <div class="navbar navbar-fixed-top profile_header_outline" role="navigation">
+	<a href="#"><div class="inbox-nav"><span class="glyphicon glyphicon-exclamation-sign glyph"></span>ALERTS(0)</div></a>
+    <a href="#"><div class="inbox-nav"><span class="glyphicon glyphicon-comment glyph"></span>INBOX(0)</div></a>
+    <a href="#"><div class="inbox-nav"><span class="glyphicon glyphicon-user glyph"></span><?php echo $manageContent->getUsername($_SESSION['user_id']);?></div></a>
 	<div class="container">
     	<div class="row profile_header_row">
-        	<div class="col-sm-12">
+        	<div class="col-sm-6 col-ms-6">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#profile_header_nav">
@@ -54,5 +57,4 @@
     <?php include("post-nav.php") ?>
 </div>
 <!-- header ends here -->
-
 

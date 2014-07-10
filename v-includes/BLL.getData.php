@@ -1302,19 +1302,61 @@
 						if($project_details[0]['award_bid_id'] == $bid['bid_id'] && $bid['awarded'] != 0)
 						{
 							echo	'<div class="col-md-10 post_bid_proposal_outline">
-									<div class="project_title_text post_bid_bidder_name"><a href="public-profile.php?uid='.$perInfo[0]['user_id'].'">'.$perInfo[0]['name'].'</a><a href="userProjectFullBidDetails.php?bid='.$bid['bid_id'].'"><button class="btn btn-primary pull-right">View Full Bid</button></a></div>
+									<div class="project_title_text post_bid_bidder_name">
+										<a href="public-profile.php?uid='.$perInfo[0]['user_id'].'">'.$perInfo[0]['name'].'</a>
+									</div>
 									<p class="project_part_description col-sm-9" style="padding:0px">'.$bid_text.'</p>
 									<p class="col-sm-3 awarded_logo_right"><img src="img/award2.png" alt="awarded" /></p>
 									<p class="post_bid_info_outline"><span class="post_bid_info_topic">Skills:</span> '.$bidder_skills.'</p>
-									<p class="post_bid_info_outline"><span class="post_bid_info_topic">Price:</span> '.$bid['currency'].' '.$bid['amount'].'</p>';
+									<p class="post_bid_info_outline"><span class="post_bid_info_topic">Price:</span> '.$bid['currency'].' '.$bid['amount'].'</p>
+									<p class="post_bid_info_outline">
+										<div class="expand-bid pull-right">
+											<a href="userProjectFullBidDetails.php?bid='.$bid['bid_id'].'">
+												<p class="pull-right txt-14-1">MESSAGGE</p>
+												<span class="pull-right glyphicon glyphicon-comment glyph"></span>
+											</a>
+										</div>
+										<div class="expand-bid pull-right">
+											<a href="userProjectFullBidDetails.php?bid='.$bid['bid_id'].'">
+												<p class="pull-right txt-14-1">View</p>
+												<span class="pull-right glyphicon glyphicon-resize-full glyph"></span>
+											</a>
+										</div>
+									</p>';
 						}
 						else
 						{
 							echo	'<div class="col-md-10 post_bid_proposal_outline">
-									<div class="project_title_text post_bid_bidder_name"><a>'.$perInfo[0]['name'].'</a><a href="userProjectFullBidDetails.php?bid='.$bid['bid_id'].'"><button class="btn btn-primary pull-right">View Full Bid</button></a></div>
+									<div class="project_title_text post_bid_bidder_name"><a>'.$perInfo[0]['name'].'</a></div>
 									<p class="project_part_description">'.$bid_text.'</p>
 									<p class="post_bid_info_outline"><span class="post_bid_info_topic">Skills:</span> '.$bidder_skills.'</p>
-									<p class="post_bid_info_outline"><span class="post_bid_info_topic">Price:</span> '.$bid['currency'].' '.$bid['amount'].'</p>';
+									<p class="post_bid_info_outline"><span class="post_bid_info_topic">Price:</span> '.$bid['currency'].' '.$bid['amount'].'</p>
+									<p class="post_bid_info_outline">
+										<div class="expand-bid pull-right">
+											<a href="userProjectFullBidDetails.php?bid='.$bid['bid_id'].'">
+												<p class="pull-right txt-14-1">AWARD</p>
+												<span class="pull-right glyphicon glyphicon-ok-circle glyph"></span>
+											</a>
+										</div>
+										<div class="expand-bid pull-right">
+											<a href="userProjectFullBidDetails.php?bid='.$bid['bid_id'].'">
+												<p class="pull-right txt-14-1">DECLINE</p>
+												<span class="pull-right glyphicon glyphicon-remove glyph"></span>
+											</a>
+										</div>
+										<div class="expand-bid pull-right">
+											<a href="userProjectFullBidDetails.php?bid='.$bid['bid_id'].'">
+												<p class="pull-right txt-14-1">MESSAGGE</p>
+												<span class="pull-right glyphicon glyphicon-comment glyph"></span>
+											</a>
+										</div>
+										<div class="expand-bid pull-right">
+											<a href="userProjectFullBidDetails.php?bid='.$bid['bid_id'].'">
+												<p class="pull-right txt-14-1">View</p>
+												<span class="pull-right glyphicon glyphicon-resize-full glyph"></span>
+											</a>
+										</div>
+									</p>';
 						}
 						
 								
@@ -2328,6 +2370,18 @@
 			$time = date('h:i:s a');
 			return $time;
 		}
+		
+		/*
+		 * method to get the username from the database
+		 * @inputParam UserId
+		 * @output string
+		 * Auth Singh
+		 */
+		 public function getUserName($user_id)
+		 {
+		 	$username = $this->manage_content->getValue_where("user_credentials","username","user_id",$user_id);
+			return $username[0]['username'];
+		 }
 	}
 	
 ?>
