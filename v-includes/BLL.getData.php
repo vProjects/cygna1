@@ -1311,7 +1311,7 @@
 									<p class="post_bid_info_outline"><span class="post_bid_info_topic">Price:</span> '.$bid['currency'].' '.$bid['amount'].'</p>
 									<p class="post_bid_info_outline">
 										<div class="expand-bid pull-right">
-											<a href="userProjectFullBidDetails.php?bid='.$bid['bid_id'].'">
+											<a href="message.php?bid='.$bid['bid_id'].'">
 												<p class="pull-right txt-14-1">MESSAGGE</p>
 												<span class="pull-right glyphicon glyphicon-comment glyph"></span>
 											</a>
@@ -1345,7 +1345,7 @@
 											</a>
 										</div>
 										<div class="expand-bid pull-right">
-											<a href="userProjectFullBidDetails.php?bid='.$bid['bid_id'].'">
+											<a href="message.php?bid='.$bid['bid_id'].'">
 												<p class="pull-right txt-14-1">MESSAGGE</p>
 												<span class="pull-right glyphicon glyphicon-comment glyph"></span>
 											</a>
@@ -2372,7 +2372,7 @@
 		}
 		
 		/*
-		 * method to get the username from the database
+		 * method to get the user name from the database
 		 * @inputParam UserId
 		 * @output string
 		 * Auth Singh
@@ -2382,6 +2382,162 @@
 		 	$username = $this->manage_content->getValue_where("user_credentials","username","user_id",$user_id);
 			return $username[0]['username'];
 		 }
+		 
+		 /*
+		 * method to get the last login time from the database
+		 * @inputParam UserId
+		 * @output string
+		 * Auth Singh
+		 */
+		 public function getLastLoginTime($user_id)
+		 {
+		 	$date = $this->manage_content->getValue_where("user_credentials","*","user_id",$user_id);
+			return $date[0]['date'];
+		 }
+		 
+		 /*
+		  * method to get the last login details
+		  * create the full UI
+		  * @param bid id
+		  * Auth Singh 
+		  */
+		  public function getLastLogin($bid)
+		  {
+			  //get the bidders name and project id from bid info table
+			  $bid_detail = $this->manage_content->getValue_where("bid_info","*","bid_id",$bid);
+			  $contractor = $this->getUserName($bid_detail[0]['user_id']);
+			  
+			  //get the contractor name from project info table
+			  $project_info = $this->manage_content->getValue_where("project_info","*","project_id",$bid_detail[0]['project_id']);
+			  $employer = $this->getUserName($project_info[0]['user_id']);
+			  
+			  echo '<div class="profile_box_outline project_list_leftbar_outline">
+					<div class="profile_box_heading">Last Login</div>
+					<div class="last-login-container">
+						<div class="l-l-username">'.$employer.'</div>
+						<div class="l-l-date">'.$this->getLastLoginTime($project_info[0]['user_id']).'</div>
+						<div class="l-l-username">'.$contractor.'</div>
+						<div class="l-l-date">'.$this->getLastLoginTime($bid_detail[0]['user_id']).'</div>
+					</div>
+				</div>';
+		  }
+		  
+	 	 /*
+		- method for getting messages from the database
+		- generates the full UI
+		- Auth: Singh
+		*/
+		function getAllMessages($bid_id,$startPoint,$limit)
+		{
+			$sort_by = 'date';
+			$startPoint = $startPoint*$limit;
+			$messages = $this->manage_content->getValueWhere_sorted("chat_info","*","bid_id",$bid_id,$sort_by,$startPoint,$limit);
+			
+			if( !empty($messages) )
+			{
+				foreach( $messages as $message )
+				{
+					if( $message['sender'] == $_SESSION['user_id'] )
+					{
+						echo '<div class="chat_part_outline">
+                                <div class="col-md-2 col-sm-2 col-xs-2">
+                                    <img src="img/dummy_profile.jpg" class="chat_user_image"/>
+                                </div>
+                                <div class="col-md-10 col-sm-10 col-xs-10">
+                                    <div class="chat_user_msg">
+                                        <p>'.nl2br($message['message']).'</p>
+                                        <p class="pull-right chat_user_msg_date"><span>'.$message['date'].'</span></p>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>';
+					}
+					else
+					{
+						echo '<div class="chat_part_outline">
+                                <div class="col-md-10 col-sm-10 col-xs-10">
+                                    <div class="chat_user_msg">
+                                        <p>'.nl2br($message['message']).'</p>
+                                         <p class="pull-right chat_user_msg_date"><span>'.$message['date'].'</span></p>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-2 col-sm-2 col-xs-2">
+                                    <img src="img/dummy_profile1.jpg" class="chat_user_image"/>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>';
+							
+							
+							//set the status to read
+							$this->manage_content->updateValueWhere("chat_info","status",0,"id",$message['id']);
+					}
+					
+				}
+			}
+			else
+			{
+				echo "Please a message to start the conversation.";
+			}
+		}
+
+		/*
+		- method for getting messages-list from the database
+		- generates the full UI
+		- Auth: Singh
+		*/
+		function getMessageList($user_id,$startPoint,$limit)
+		{
+			$sort_by = 'date';
+			$startPoint = $startPoint*$limit;
+			$messages = $this->manage_content->getMessageList("chat_info","*",$user_id,$sort_by,$startPoint,$limit);
+			
+			if( !empty($messages) )
+			{
+				foreach( $messages as $message )
+				{
+					//get the project name
+					$project_name = $this->manage_content->getValue_where("project_info","*","project_id",$message['project_id']);
+					
+					if( $message['sender'] != $user_id )
+					{
+						if( $message['status'] == 1 )
+						{
+							echo '<div class="chat_part_outline">
+	                                <div class="col-md-12 col-sm-12 col-xs-12">
+	                                    <div class="chat_user_msg">
+	                                        <a href="message.php?bid='.$message['bid_id'].'"><p><span class="glyphicon glyphicon-envelope glyph glyph-unread"></span><strong>'.$message['message'].'</strong></p></a>
+	                                        <a href="#"><p class="pull-left chat_user_msg_date"><span>'.$project_name[0]['title'].'</span></p></a>
+	                                        <p class="pull-right chat_user_msg_date"><span>'.$message['date'].'</span></p>
+	                                        <div class="clearfix"></div>
+	                                    </div>
+	                                </div>
+	                                <div class="clearfix"></div>
+	                            </div>';
+						}
+						else
+						{
+							echo '<div class="chat_part_outline">
+	                                <div class="col-md-12 col-sm-12 col-xs-12">
+	                                    <div class="chat_user_msg">
+	                                        <a href="message.php?bid='.$message['bid_id'].'"><p><span class="glyphicon glyphicon-envelope glyph"></span>'.$message['message'].'</p></a>
+	                                        <a href="#"><p class="pull-left chat_user_msg_date"><span>'.$project_name[0]['title'].'</span></p></a>
+	                                        <p class="pull-right chat_user_msg_date"><span>'.$message['date'].'</span></p>
+	                                        <div class="clearfix"></div>
+	                                    </div>
+	                                </div>
+	                                <div class="clearfix"></div>
+	                            </div>';
+						}
+					}
+				}
+			}
+			else
+			{
+				echo 'No new messages.';
+			}
+		}
 	}
 	
 ?>

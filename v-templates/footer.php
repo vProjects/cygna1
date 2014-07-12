@@ -94,6 +94,7 @@
 		maxDate: '+3m',
 		showTrigger: '#calImg'
 	});
+	
 </script>
 </body>
 </html>

@@ -56,67 +56,14 @@
                 	<div class="profile_box_heading">Inbox</div>
                     <div class="billing_box_inner">
                     	<div class="billing_page_heading">Messages</div>
+
                         <!-- message section starts here -->
                         <div class="message_details_outline">
-                        	<div class="chat_part_outline">
-                                <div class="col-md-12 col-sm-12 col-xs-12">
-                                    <div class="chat_user_msg">
-                                        <a href="message.php"><p><span class="glyphicon glyphicon-envelope glyph glyph-unread"></span> I have a website with new domain. I want responsive design for my site. ... </p></a>
-                                        <a href="#"><p class="pull-left chat_user_msg_date"><span>Project Name</span></p></a>
-                                        <p class="pull-right chat_user_msg_date"><span>Tuesday, 18th feb 2014</span> | <span>12:05:46</span></p>
-                                        <div class="clearfix"></div>
-                                    </div>
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                            
-                            <div class="chat_part_outline">
-                                <div class="col-md-12 col-sm-12 col-xs-12">
-                                    <div class="chat_user_msg">
-                                        <a href="message.php"><p><span class="glyphicon glyphicon-envelope glyph"></span> I have a website with new domain. I want responsive design for my site. ... </p></a>
-                                        <a href="#"><p class="pull-left chat_user_msg_date"><span>Project Name</span></p></a>
-                                        <p class="pull-right chat_user_msg_date"><span>Tuesday, 18th feb 2014</span> | <span>12:05:46</span></p>
-                                        <div class="clearfix"></div>
-                                    </div>
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                            
-                            <div class="chat_part_outline">
-                                <div class="col-md-12 col-sm-12 col-xs-12">
-                                    <div class="chat_user_msg">
-                                        <a href="message.php"><p><span class="glyphicon glyphicon-envelope glyph"></span> I have a website with new domain. I want responsive design for my site. ... </p></a>
-                                        <a href="#"><p class="pull-left chat_user_msg_date"><span>Project Name</span></p></a>
-                                        <p class="pull-right chat_user_msg_date"><span>Tuesday, 18th feb 2014</span> | <span>12:05:46</span></p>
-                                        <div class="clearfix"></div>
-                                    </div>
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                            
-                            <div class="chat_part_outline">
-                                <div class="col-md-12 col-sm-12 col-xs-12">
-                                    <div class="chat_user_msg">
-                                        <a href="message.php"><p><span class="glyphicon glyphicon-envelope glyph"></span> I have a website with new domain. I want responsive design for my site. ... </p></a>
-                                        <a href="#"><p class="pull-left chat_user_msg_date"><span>Project Name</span></p></a>
-                                        <p class="pull-right chat_user_msg_date"><span>Tuesday, 18th feb 2014</span> | <span>12:05:46</span></p>
-                                        <div class="clearfix"></div>
-                                    </div>
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                            
-                            <div class="chat_part_outline">
-                                <div class="col-md-12 col-sm-12 col-xs-12">
-                                    <div class="chat_user_msg">
-                                        <a href="message.php"><p><span class="glyphicon glyphicon-envelope glyph"></span> I have a website with new domain. I want responsive design for my site. ... </p></a>
-                                        <a href="#"><p class="pull-left chat_user_msg_date"><span>Project Name</span></p></a>
-                                        <p class="pull-right chat_user_msg_date"><span>Tuesday, 18th feb 2014</span> | <span>12:05:46</span></p>
-                                        <div class="clearfix"></div>
-                                    </div>
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
+                        	<?php
+	                    		//get the full message list
+	                    		$manageContent->getMessageList($_SESSION['user_id'],0,10);
+	                    	?>
+                        	
                         </div>
                         <!-- message section ends here -->
                     </div>

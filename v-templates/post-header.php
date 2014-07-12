@@ -30,13 +30,38 @@
   js = d.createElement(s); js.id = id;
   js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0";
   fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
+}(document, 'script', 'facebook-jssdk'));
+
+	//function to check new message
+	function messageNotification()
+	{
+		var notification_div = document.getElementById('msg_notification');
+		
+		$.ajax({
+		  url: "v-includes/class.fetchData.php",
+		  type: "POST",
+		  data: "refData=getMsgNotification"
+		}).success(function(data) {
+		  notification_div.innerHTML = data;
+		});
+	}
+	
+	//make the first call
+	messageNotification();
+	
+	$( document ).ready(function() {
+	    setInterval(function() {messageNotification();}, 3000);
+	});
+	
+</script>
 
 <!-- header starts here -->
 <div class="navbar navbar-fixed-top profile_header_outline" role="navigation">
-	<a href="#"><div class="inbox-nav"><span class="glyphicon glyphicon-exclamation-sign glyph"></span>ALERTS(0)</div></a>
-    <a href="#"><div class="inbox-nav"><span class="glyphicon glyphicon-comment glyph"></span>INBOX(0)</div></a>
-    <a href="#"><div class="inbox-nav"><span class="glyphicon glyphicon-user glyph"></span><?php echo $manageContent->getUsername($_SESSION['user_id']);?></div></a>
+	<?php if(isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])){ ?>
+		<a href="#"><div class="inbox-nav"><span class="glyphicon glyphicon-exclamation-sign glyph"></span>ALERTS(0)</div></a>
+	    <a href="message-list.php"><div class="inbox-nav"><span class="glyphicon glyphicon-comment glyph"></span>INBOX(<span id="msg_notification">0</span>)</div></a>
+	    <a href="#"><div class="inbox-nav"><span class="glyphicon glyphicon-user glyph"></span><?php echo $manageContent->getUsername($_SESSION['user_id']);?></div></a>
+	<?php } ?>
 	<div class="container">
     	<div class="row profile_header_row">
         	<div class="col-sm-6 col-ms-6">

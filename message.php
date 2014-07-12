@@ -44,6 +44,8 @@
 					{
 						include 'v-modules/right-nav.php';
 					}
+					//last loin widget
+					include 'v-modules/last-login.php';
 					
 					include ("v-templates/poll.php");
 				?>	
@@ -61,69 +63,19 @@
 	                        <!-- input msg starts here -->
 	                        <div class="input_msg_outline">
 	                             <div class="col-md-10 col-sm-10 col-xs-10">
-	                                <textarea rows="2" class="form-control input_msg_area"></textarea>
+	                                <textarea rows="2" class="form-control input_msg_area" id="msg-bx"></textarea>
 	                             </div>
 	                             <div class="col-md-2 col-sm-2 col-xs-2">
-	                                <div class="input_msg_submit">SEND</div>
+	                                <div class="input_msg_submit" onclick="sendmsg('msg-bx',<?php echo "'".$_GET['bid']."'"; ?>)">SEND</div>
 	                             </div>
 	                             <div class="clearfix"></div>
 	                        </div>
-	                    	<!-- input msg ends here -->
-                        	<div class="chat_part_outline">
-                                <div class="col-md-2 col-sm-2 col-xs-2">
-                                    <img src="img/dummy_profile.jpg" class="chat_user_image"/>
-                                </div>
-                                <div class="col-md-10 col-sm-10 col-xs-10">
-                                    <div class="chat_user_msg">
-                                        <p>I have a website with new domain. I want responsive design for my site. I will discuss the details of work after I choose the right person for it.Place your bids according to the requirement. You can freely ask your doubts.I have a website with new domain. </p>
-                                        <p class="pull-right chat_user_msg_date"><span>Tuesday, 18th feb 2014</span> | <span>12:05:46</span></p>
-                                        <div class="clearfix"></div>
-                                    </div>
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                            
-                            <div class="chat_part_outline">
-                                <div class="col-md-10 col-sm-10 col-xs-10">
-                                    <div class="chat_user_msg">
-                                        <p>I have a website with new domain. I want responsive design for my site. I will discuss the details of work after I choose the right person for it.Place your bids according to the requirement. You can freely ask your doubts.I have a website with new domain. </p>
-                                        <p class="pull-right chat_user_msg_date"><span>Tuesday, 18th feb 2014</span> | <span>12:05:46</span></p>
-                                        <div class="clearfix"></div>
-                                    </div>
-                                </div>
-                                <div class="col-md-2 col-sm-2 col-xs-2">
-                                    <img src="img/dummy_profile1.jpg" class="chat_user_image"/>
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                            
-                            <div class="chat_part_outline">
-                                <div class="col-md-2 col-sm-2 col-xs-2">
-                                    <img src="img/dummy_profile.jpg" class="chat_user_image"/>
-                                </div>
-                                <div class="col-md-10 col-sm-10 col-xs-10">
-                                    <div class="chat_user_msg">
-                                        <p>I have a website with new domain. I want responsive design for my site. I will discuss the details of work after I choose the right person for it.Place your bids according to the requirement. You can freely ask your doubts.I have a website with new domain. </p>
-                                        <p class="pull-right chat_user_msg_date"><span>Tuesday, 18th feb 2014</span> | <span>12:05:46</span></p>
-                                        <div class="clearfix"></div>
-                                    </div>
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                            
-                            <div class="chat_part_outline">
-                                <div class="col-md-10 col-sm-10 col-xs-10">
-                                    <div class="chat_user_msg">
-                                        <p>I have a website with new domain. I want responsive design for my site. I will discuss the details of work after I choose the right person for it.Place your bids according to the requirement. You can freely ask your doubts.I have a website with new domain. </p>
-                                        <p class="pull-right chat_user_msg_date"><span>Tuesday, 18th feb 2014</span> | <span>12:05:46</span></p>
-                                        <div class="clearfix"></div>
-                                    </div>
-                                </div>
-                                <div class="col-md-2 col-sm-2 col-xs-2">
-                                    <img src="img/dummy_profile1.jpg" class="chat_user_image"/>
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
+	                        
+                        	<?php
+                        		//get the messages from the database
+                        		$manageContent->getAllMessages($_GET['bid'],0,10);
+                        	?>
+	                    	
                         </div>
                         <!-- message section ends here -->
                     </div>
@@ -142,6 +94,49 @@
 </div>
 </div>
 <!-- body ends here -->
+<script type="text/javascript">
+	function sendmsg(txt_id,bid_id)
+	{
+		var msg = document.getElementById(txt_id).value;
+		if( msg != "" )
+		{
+			$.ajax({
+			  url: "v-includes/class.fetchData.php",
+			  type: "POST",
+			  data: "msg="+msg+"&bid="+bid_id+"&refData=postMsg"
+			}).success(function(data) {
+			  alert(data);
+			  document.getElementById(txt_id).value = "";
+			});
+		}
+		else
+		{
+			alert('Please type a message.');
+		}
+			
+	}
+	
+// 	
+	// function getMessage()
+	// {
+		// var bid = <?php //echo "'".$_GET['bid']."'"; ?>;
+// 		
+		// if( bid != "" )
+		// {
+			// $.ajax({
+			  // url: "v-includes/class.fetchData.php",
+			  // type: "POST",
+			  // data: "bid="+bid+"&refData=getMsg"
+			// }).success(function(data) {
+			  // alert(data);
+			// });
+		// }
+		// else
+		// {
+			// alert('Error in fetching previous message.');
+		// }
+	// }
+</script>
 <?php
 	include 'v-templates/post-footer.php';
 ?>

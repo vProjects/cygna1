@@ -107,9 +107,10 @@
 						$sign_in = $userCreden[0]['sign_in_count'] + 1;
 						//getting last sign in ip
 						$last_sign_in_ip = $this->manageUtility->getIpAddress();
-						//updatin the values
+						//updating the values
 						$update1 = $this->manageContent->updateValueWhere("user_credentials","sign_in_count",$sign_in,"user_id",$userCreden[0]['user_id']);
 						$update2 = $this->manageContent->updateValueWhere("user_credentials","last_sign_in_ip",$last_sign_in_ip,"user_id",$userCreden[0]['user_id']);
+						$update1 = $this->manageContent->updateValueWhere("user_credentials","date",date("Y-m-d g:i:s"),"user_id",$userCreden[0]['user_id']);
 						return array(1,'Login Successfull!!',$userCreden[0]['user_id'],$userCreden[0]['category']);
 					}
 					else

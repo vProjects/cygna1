@@ -485,37 +485,15 @@
 			}
 		}
 		
-		function abc($table_name,$column_name,$column_values){
-			//declaring variables for preparing the query
-			$column = "";
-			$value = "";
-			for($i=0;$i<count($column_name);$i++)
-			{
-				$column = $column."`".$column_name[$i]."`, ";
-				$value = $value."?,"; 
-			}
-			//modifying the string for column name and values
-			$column = substr($column,0,-2);
-			$value = substr($value,0,-1);
-			$query = $this->link->prepare("INSERT INTO `$table_name`($column) VALUES ($value)");
-			$query->execute($column_values);
-			return $query->rowCount();
-		}
-		
-		function abcd($table_name,$col_value,$column_name,$column_values)
+		/*
+		 * get values from the database
+		 * sorted descending
+		 * starting point and limit included
+		 * Auth Singh
+		 */
+		function getValueWhere_sorted($table_name,$value,$row_value,$value_entered,$sort_by,$startPoint,$limit)
 		{
-			//declaring variables for preparing the query
-			$column = "";
-			$value = "";
-			
-			for($i=0;$i<count($column_name);$i++)
-			{
-				$column = $column." AND ".$column_name[$i]."='".$column_values[$i]."'";
-				
-			}
-			$column = substr($column,5);
-			
-			$query = $this->link->prepare("SELECT ". $col_value ." from ". $table_name ." where ". $column);
+			$query = $this->link->prepare("SELECT $value from $table_name where $row_value='$value_entered' ORDER BY `$sort_by` DESC LIMIT $startPoint,$limit");
 			$query->execute();
 			$rowcount = $query->rowCount();
 			if($rowcount > 0){
@@ -525,8 +503,42 @@
 			else{
 				return $rowcount;
 			}
-			
 		}
 		
+		/*
+		 *  get Value 2 where conditions
+		 *  Auth Singh
+		 */
+		function get_msg_notification($table_name,$value,$row_value1,$value_entered1,$row_value2,$value_entered2,$row_value3,$value_entered3,$row_value4,$value_entered4)
+		{
+			$query = $this->link->prepare("SELECT $value from $table_name where ($row_value1='$value_entered1' OR $row_value2='$value_entered2') AND $row_value3 !='$value_entered3' AND $row_value4='$value_entered4'");
+			$query->execute();
+			$rowcount = $query->rowCount();
+			if($rowcount > 0){
+				$result = $query->fetchAll(PDO::FETCH_ASSOC);
+				return $result;
+			}
+			else{
+				return $rowcount;
+			}
+		}
+		
+		/*
+		 *  get message list
+		 *  Auth Singh
+		 */
+		function getMessageList($table_name,$value,$user_id,$sort_by,$startPoint,$limit)
+		{
+			$query = $this->link->prepare("SELECT $value from `$table_name` where (`con_user_id`='$user_id' OR `emp_user_id`='$user_id') ORDER BY `$sort_by` DESC LIMIT $startPoint,$limit");
+			$query->execute();
+			$rowcount = $query->rowCount();
+			if($rowcount > 0){
+				$result = $query->fetchAll(PDO::FETCH_ASSOC);
+				return $result;
+			}
+			else{
+				return $rowcount;
+			}
+		}
 	}
 ?>

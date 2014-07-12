@@ -1610,3 +1610,16 @@ border-top-right-radius: 5px;
 	color: #454341;
 	background-color: #fff;
 }
+.last-login-container {
+    background-color: #fff;
+    padding: 10px;
+}
+.l-l-username {
+    font-size: 16px;
+    font-weight: bold;
+    color: #414141;
+}
+.l-l-date{
+    font-size: 14px;
+    margin-bottom: 12px;
+}

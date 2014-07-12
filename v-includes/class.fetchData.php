@@ -381,6 +381,72 @@
 			$subString = substr($text,0,$string_no);
 			return $subString;
 		}
+		
+		/*
+		- method to insert the message in the database
+		- Auth Singh
+		*/
+		function insertMsg($postData)
+		{
+			if( !empty($postData['msg']) && !empty($postData['bid']) )
+			{
+				//generate chat id
+				$chat_id = uniqid('CHAT');
+				
+				//get full bid info
+				$bid = $this->manageContent->getValue_where("bid_info","*","bid_id",$postData['bid']);
+				
+				//get project_id from the bid_info table
+				$project = $this->manageContent->getValue_where("project_info","*","project_id",$bid[0]['project_id']);
+				
+				//get the details
+				$sender = $_SESSION['user_id'];
+				$contractor = $bid[0]['user_id'];
+				$employer = $project[0]['user_id'];
+				$message = $postData['msg'];
+				$bid_id = $postData['bid'];
+				$project_id = $bid[0]['project_id'];
+				$date = date("Y-m-d g:i:s");
+				$status = 1;		//1 for unread message
+				
+				//insert the values
+				$column_name = array("chat_id", "sender", "message", "emp_user_id", "con_user_id", "bid_id", "project_id", "date", "status");
+				$column_value = array($chat_id, $sender, $message, $employer, $contractor, $bid_id, $project_id, $date, $status);
+				$insert = $this->manageContent->insertValue("chat_info",$column_name,$column_value);
+				
+				if( $insert > 0 )
+				{
+					echo "Message send successfully.";
+				}
+				else {
+					echo "Error!!. Please try again.";
+				}
+			}
+			else
+			{
+				echo "Please fill the form properly and try again.Thank you.";
+			}
+		}
+
+		/*
+		- method for getting messages notification from the database
+		- generates the full UI
+		- Auth: Singh
+		*/
+		function getMsgNotification($postData)
+		{
+			$user_id = $_SESSION['user_id'];
+			$messages = $this->manageContent->get_msg_notification("chat_info","*","emp_user_id",$user_id,"con_user_id",$user_id,'sender',$user_id,'status',1);
+			
+			if( !empty($messages) )
+			{
+				echo count($messages);
+			}
+			else
+			{
+				echo 0;
+			}
+		}
 			
 	}
 	
@@ -463,6 +529,18 @@
 		case 'awardBid':
 		{
 			$awardBid = $fetchData->awardBidForProject($GLOBALS['_POST']['bid_id']);
+			break;
+		}
+		//for posting a message in the system
+		case 'postMsg':
+		{
+			$fetchData->insertMsg($GLOBALS['_POST']);
+			break;
+		}
+		//for fetching a message in the system
+		case 'getMsgNotification':
+		{
+			$fetchData->getMsgNotification($GLOBALS['_POST']);
 			break;
 		}
 		default:
