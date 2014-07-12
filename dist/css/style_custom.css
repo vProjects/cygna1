@@ -1,0 +1,11 @@
+.hvr-dec-none:hover{
+	text-decoration: none;
+}
+
+.carousel-caption-custom > h3{
+	text-align: left;
+}
+
+.carousel-caption-custom > p{
+	text-align: left;
+}

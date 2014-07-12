@@ -23,6 +23,7 @@
 <link rel="stylesheet" type="text/css" href="dist/css/bootstrap.css" />
 <link rel="stylesheet" type="text/css" href="dist/css/bootstrap-theme.css" />
 <link rel="stylesheet" type="text/css" href="dist/css/style.css" />
+<link rel="stylesheet" type="text/css" href="dist/css/style_custom.css" />
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="dist/js/bootstrap.js"></script>
@@ -109,13 +110,21 @@
                   <!-- Wrapper for slides -->
                   <div class="carousel-inner">
                     <div class="item active">
-                      <img src="http://placehold.it/1280x500" alt="img1">
+                      <img src="img/stock-photo-the-word-brand-in-cut-out-magazine-letters-pinned-to-a-cork-notice-board-an-essential-part-of-any-139304657.jpg" alt="img1">
+                      <div class="carousel-caption carousel-caption-custom">
+					    <h3>Logos and Branding</h3>
+					    <p>Lorem ipsum dolor sit amet, consectetur</p>
+					  </div>
                     </div>
                     <div class="item">
-                      <img src="http://placehold.it/1280x500" alt="img2">
+                      <img src="img/stock-vector-modern-design-minimal-style-infographic-template-can-be-used-for-infographics-numbered-banners-141801829.jpg" alt="img2">
+	                  <div class="carousel-caption carousel-caption-custom">
+						 <h3>Responsive Design</h3>
+						 <p>Lorem ipsum dolor sit amet, consectetur</p>
+					  </div>
                     </div>
                     <div class="item">
-                      <img src="http://placehold.it/1280x500" alt="img3">
+                      <img src="img/stock-photo-designer-s-desk-with-responsive-design-concept-195478520.jpg" alt="img3">
                     </div>
                   </div>
                 
@@ -133,62 +142,78 @@
         <!-- body details starts here -->
         <div class="row box_part_row">
         	<div class="col-md-3 col-sm-6 col-xs-6 box_part_outline">
-            	<img src="img/box_image1.png" class="box_part_image" />
-                <div class="box_part_description_outline">
-                	<h3 class="box_part_description_heading">Lorem Ipsum</h3>
-                    <p class="box_part_description_description">Lorem ipsum dolor sit amet</p>
-                </div>
+            	<a href="finding_job.php" class="hvr-dec-none">
+            		<img src="img/httpswww.flickr.comphotoszeldman10821348593.jpg" class="box_part_image" />
+	                <div class="box_part_description_outline">
+	                	<h3 class="box_part_description_heading">Design</h3>
+	                    <p class="box_part_description_description">22254 hourlies</p>
+	                </div>
+            	</a>
             </div>
             <div class="col-md-3 col-sm-6 col-xs-6 box_part_outline">
-            	<img src="img/box_image2.png" class="box_part_image" />
-                <div class="box_part_description_outline">
-                	<h3 class="box_part_description_heading">Lorem Ipsum</h3>
-                    <p class="box_part_description_description">Lorem ipsum dolor sit amet</p>
-                </div>
+            	<a href="finding_job.php" class="hvr-dec-none">
+            		<img src="img/stock-photo-web-design-concept-122664079.jpg" class="box_part_image" />
+	                <div class="box_part_description_outline">
+	                	<h3 class="box_part_description_heading">Web Development</h3>
+	                    <p class="box_part_description_description">22254 hourlies</p>
+	                </div>
+            	</a>
             </div>
             <div class="col-md-3 col-sm-6 col-xs-6 box_part_outline">
-            	<img src="img/box_image3.png" class="box_part_image" />
-                <div class="box_part_description_outline">
-                	<h3 class="box_part_description_heading">Lorem Ipsum</h3>
-                    <p class="box_part_description_description">Lorem ipsum dolor sit amet</p>
-                </div>
+            	<a href="finding_job.php" class="hvr-dec-none">
+            		<img src="img/httpswww.flickr.comphotosdahlstroms5246229049.jpg" class="box_part_image" />
+	                <div class="box_part_description_outline">
+	                	<h3 class="box_part_description_heading">Writing and Translation</h3>
+	                    <p class="box_part_description_description">22254 hourlies</p>
+	                </div>
+            	</a>
             </div>
             <div class="col-md-3 col-sm-6 col-xs-6 box_part_outline">
-            	<img src="img/box_image4.png" class="box_part_image" />
-                <div class="box_part_description_outline">
-                	<h3 class="box_part_description_heading">Lorem Ipsum</h3>
-                    <p class="box_part_description_description">Lorem ipsum dolor sit amet</p>
-                </div>
+            	<a href="finding_job.php" class="hvr-dec-none">
+            		<img src="img/httpswww.flickr.comphotosannahenryson5743035487.jpg" class="box_part_image" />
+	                <div class="box_part_description_outline">
+	                	<h3 class="box_part_description_heading">Video, Photo &amp; Audio</h3>
+	                    <p class="box_part_description_description">22254 hourlies</p>
+	                </div>
+            	</a>
             </div>
         </div>
         <div class="row box_part_row">
         	<div class="col-md-3 col-sm-6 col-xs-6 box_part_outline">
-            	<img src="img/box_image5.png" class="box_part_image" />
-                <div class="box_part_description_outline">
-                	<h3 class="box_part_description_heading">Lorem Ipsum</h3>
-                    <p class="box_part_description_description">Lorem ipsum dolor sit amet</p>
-                </div>
+            	<a href="finding_job.php" class="hvr-dec-none">
+            		<img src="img/stock-photo-closeup-of-businesswoman-typing-on-laptop-computer-180863504.jpg" class="box_part_image" />
+	                <div class="box_part_description_outline">
+	                	<h3 class="box_part_description_heading">Software Dev and Mobile</h3>
+	                    <p class="box_part_description_description">22254 hourlies</p>
+	                </div>
+            	</a>
             </div>
             <div class="col-md-3 col-sm-6 col-xs-6 box_part_outline">
-            	<img src="img/box_image6.png" class="box_part_image" />
-                <div class="box_part_description_outline">
-                	<h3 class="box_part_description_heading">Lorem Ipsum</h3>
-                    <p class="box_part_description_description">Lorem ipsum dolor sit amet</p>
-                </div>
+            	<a href="finding_job.php" class="hvr-dec-none">
+            		<img src="img/stock-photo-social-media-and-networking-concept-151141895.jpg" class="box_part_image" />
+	                <div class="box_part_description_outline">
+	                	<h3 class="box_part_description_heading">Social Media</h3>
+	                    <p class="box_part_description_description">22254 hourlies</p>
+	                </div>
+            	</a>
             </div>
             <div class="col-md-3 col-sm-6 col-xs-6 box_part_outline">
-            	<img src="img/box_image7.png" class="box_part_image" />
-                <div class="box_part_description_outline">
-                	<h3 class="box_part_description_heading">Lorem Ipsum</h3>
-                    <p class="box_part_description_description">Lorem ipsum dolor sit amet</p>
-                </div>
+            	<a href="finding_job.php" class="hvr-dec-none">
+            		<img src="img/stock-photo-business-charts-blue-with-marker-pen-and-paper-clip-95421733.jpg" class="box_part_image" />
+	                <div class="box_part_description_outline">
+	                	<h3 class="box_part_description_heading">Sales and Marketing</h3>
+	                    <p class="box_part_description_description">22254 hourlies</p>
+	                </div>
+            	</a>
             </div>
             <div class="col-md-3 col-sm-6 col-xs-6 box_part_outline">
-            	<img src="img/box_image8.png" class="box_part_image" />
-                <div class="box_part_description_outline">
-                	<h3 class="box_part_description_heading">Lorem Ipsum</h3>
-                    <p class="box_part_description_description">Lorem ipsum dolor sit amet</p>
-                </div>
+            	<a href="finding_job.php" class="hvr-dec-none">
+            		<img src="img/stock-photo-business-handshake-at-modern-office-with-bussiness-people-on-background-131432045.jpg" class="box_part_image" />
+	                <div class="box_part_description_outline">
+	                	<h3 class="box_part_description_heading">Business Support</h3>
+	                    <p class="box_part_description_description">22254 hourlies</p>
+	                </div>
+            	</a>
             </div>
         </div>
         <!-- body details ends here -->
