@@ -1,6 +1,6 @@
 <?php
 	session_start();
-	$pageTitle = 'Message';
+	$pageTitle = 'Your Workroom';
 	if(!isset($GLOBALS['_COOKIE']['uid']) && !isset($_SESSION['user_id']))
 	{
 		header("Location: log_in.php");
@@ -11,6 +11,7 @@
 	if(isset($GLOBALS['_GET']['wid']))
 	{
 		$wid = $GLOBALS['_GET']['wid'];
+		$bid_id = $manageContent->getBidIdFromWid($_GET['wid']);
 	}
 	/*else
 	{
@@ -42,13 +43,21 @@
 					}
 					else
 					{
-						include 'v-modules/right-nav.php';
+						echo '<div class="profile_box_outline project_list_leftbar_outline">
+								<div class="profile_box_heading">Quick Links</div>
+								<ul class="profile_overview">
+									<li><a href="cygna.php?op=job">JobList</a></li>
+									<li><a href="cygna.php?op=pro">ProjectList</a></li>
+								</ul>
+							</div>';
 					}
-					//last loin widget
-					include 'v-modules/last-login.php';
-					
-					include ("v-templates/poll.php");
-				?>	
+				?>
+                <?php
+					include 'v-modules/user-running-projects.php';
+				?>
+			<?php
+				include ("v-templates/poll.php");
+			?>	
 			</div>	
 			
             <!-- body left section ends here -->
@@ -66,14 +75,14 @@
 	                                <textarea rows="2" class="form-control input_msg_area" id="msg-bx"></textarea>
 	                             </div>
 	                             <div class="col-md-2 col-sm-2 col-xs-2">
-	                                <div class="input_msg_submit" onclick="sendmsg('msg-bx',<?php echo "'".$_GET['bid']."'"; ?>)">SEND</div>
+	                                <div class="input_msg_submit" onclick="sendmsg('msg-bx',<?php echo "'".$bid_id."'"; ?>)">SEND</div>
 	                             </div>
 	                             <div class="clearfix"></div>
 	                        </div>
 	                        
                         	<?php
                         		//get the messages from the database
-                        		$manageContent->getAllMessages($_GET['bid'],0,10);
+                        		$manageContent->getAllMessages($bid_id,0,10);
                         	?>
 	                    	
                         </div>
@@ -94,7 +103,6 @@
 </div>
 </div>
 <!-- body ends here -->
-
 <?php
 	include 'v-templates/post-footer.php';
 ?>

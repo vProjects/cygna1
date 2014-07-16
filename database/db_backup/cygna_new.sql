@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost:80
--- Generation Time: Jul 16, 2014 at 03:27 PM
+-- Generation Time: Jul 13, 2014 at 01:06 AM
 -- Server version: 5.5.37-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.2
 
@@ -19,34 +19,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `cygna_new`
 --
-
--- --------------------------------------------------------
-
---
--- Table structure for table `award_info`
---
-
-CREATE TABLE IF NOT EXISTS `award_info` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `award_id` varchar(300) NOT NULL,
-  `project_id` varchar(300) NOT NULL,
-  `bid_id` varchar(300) NOT NULL,
-  `employer_id` varchar(300) NOT NULL,
-  `contractor_id` varchar(300) NOT NULL,
-  `awarded_date` datetime NOT NULL,
-  `is_accepted` int(11) NOT NULL,
-  `result_date` datetime NOT NULL,
-  `is_declined` int(11) NOT NULL,
-  `status` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
-
---
--- Dumping data for table `award_info`
---
-
-INSERT INTO `award_info` (`id`, `award_id`, `project_id`, `bid_id`, `employer_id`, `contractor_id`, `awarded_date`, `is_accepted`, `result_date`, `is_declined`, `status`) VALUES
-(4, 'awa53c52ddcc4af7', 'pro536358c66710b', 'bid53887dc667f7d', 'user5368cebf96e8b', 'user534fa645dc7d1', '0000-00-00 00:00:00', 1, '2014-07-16 02:10:39', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -81,9 +53,9 @@ CREATE TABLE IF NOT EXISTS `bid_info` (
 
 INSERT INTO `bid_info` (`id`, `bid_id`, `project_id`, `user_id`, `description`, `original_file`, `file`, `currency`, `amount`, `time_range`, `date`, `time`, `ip`, `awarded`, `chat_initiated`, `activation_notes`, `status`) VALUES
 (1, 'bid536df3252c72d', 'pro5363598ecf6d3', 'user536103eece459', 'abc is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industrjjgh jghj ghjg Ipsum is simply dummy text of the printing typesetting industry.Lorem Ipsum is simply dummy text of the printing and tyjdgf djsgfis..', 'cart-tabs.png', 'files/project/6f28a0b7e4accd6a97666a517e042afd.png', '$', '800', '1 Month', '2014-05-10', '11:36:37', '::1', 1, 0, NULL, '1'),
-(2, 'bid536dfcb1913ba', 'pro5361055c3eb15', 'user536103eece459', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.', 'command.png', 'files/project/ddd0cb777525490b1f160bd390a2c3c6.png', '$', '1200', '1 Month', '2014-05-10', '12:17:21', '::1', 1, 0, NULL, '1'),
+(2, 'bid536dfcb1913ba', 'pro5361055c3eb15', 'user536103eece459', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.', 'command.png', 'files/project/ddd0cb777525490b1f160bd390a2c3c6.png', '$', '1200', '1 Month', '2014-05-10', '12:17:21', '::1', 0, 0, NULL, '1'),
 (3, 'bid53887da5ec53c', 'pro537b1b70de3b7', 'user5368cebf96e8b', 'abc is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industrjjgh jghj ghjg Ipsum..\r\nabc is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industrjjgh jghj ghjg Ipsum is ', '', '', '$', '500', '2 Weeks', '2014-05-30', '02:46:29', '::1', 0, 0, NULL, '1'),
-(4, 'bid53887dc667f7d', 'pro536358c66710b', 'user5368cebf96e8b', 'abc is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industrjjgh jghj ghjg Ipsum\r\nabc is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industrjjgh jghj ghjg Ipsum is \r\nabc is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industrjjgh jghj ghjg Ipsum is \r\nabc is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industrjjgh jghj ghjg Ipsum is \r\nabc is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industrjjgh jghj ghjg Ipsum is \r\nabc is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industrjjgh jghj ghjg Ipsum is ', '', '', '$', '966', 'Above 2 Months', '2014-05-30', '02:47:02', '::1', 1, 0, NULL, '1'),
+(4, 'bid53887dc667f7d', 'pro536358c66710b', 'user5368cebf96e8b', 'abc is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industrjjgh jghj ghjg Ipsum\r\nabc is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industrjjgh jghj ghjg Ipsum is \r\nabc is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industrjjgh jghj ghjg Ipsum is \r\nabc is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industrjjgh jghj ghjg Ipsum is \r\nabc is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industrjjgh jghj ghjg Ipsum is \r\nabc is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industrjjgh jghj ghjg Ipsum is ', '', '', '$', '966', 'Above 2 Months', '2014-05-30', '02:47:02', '::1', 0, 0, NULL, '1'),
 (5, 'bid53887de7a0572', 'pro535a050d029eb', 'user5368cebf96e8b', 'abc is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industrjjgh jghj ghjg Ipsum.', 'chitra.sql', 'files/project/81500c8c69e28160b6889f31bcd85e9d.sql', '$', '100', '3 Days', '2014-05-30', '02:47:35', '::1', 0, 0, NULL, '1'),
 (6, 'bid53887e4b40133', 'pro537b1b70de3b7', 'user534fa645dc7d1', 'abc is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industrjjgh jghj ghjg Ipsum kjhfskdhfs fksdhfksd', '', '', '$', '800', '1 Month', '2014-05-30', '02:49:15', '::1', 0, 0, NULL, '1'),
 (7, 'bid539c381b37493', 'pro5371bb257a34c', 'user534fa645dc7d1', 'Smarty is a web template system written in PHP. Smarty is primarily promoted as a tool for separation of concerns.[1] Smarty is intended to simplify compartmentalization, allowing the front-end of a web page to change separately from its back-end. Ideally, this lowers costs and minimizes the efforts associated with software maintenance.\r\n\r\nSmarty generates web content through the placement of special Smarty tags within a document. These tags are processed and substituted with other code. Tags are directives for Smarty that are enclosed by template delimiters. These directives can be variables, denoted by a dollar sign ($), functions, logical or loop statements. Smarty allows PHP programmers to define custom functions that can be accessed using Smarty tags.', 'jquery-1.2.6.min.js', 'files/project/dfa2d45f8ef1bc1e1524e0871c17bf0d.2.6', '$', '900', '2 Weeks', '2014-06-14', '01:55:07', '::1', 0, 0, NULL, '1'),
@@ -132,18 +104,25 @@ CREATE TABLE IF NOT EXISTS `chat_info` (
   `date` datetime NOT NULL,
   `status` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=45 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=38 ;
 
 --
 -- Dumping data for table `chat_info`
 --
 
 INSERT INTO `chat_info` (`id`, `chat_id`, `sender`, `message`, `emp_user_id`, `con_user_id`, `bid_id`, `project_id`, `date`, `status`) VALUES
-(40, 'CHAT53c3a67c9762e', 'user534fa645dc7d1', 'Hi', 'user534fa645dc7d1', 'user536103eece459', 'bid536df3252c72d', 'pro5363598ecf6d3', '2014-07-14 03:14:28', '0'),
-(41, 'CHAT53c3a69075517', 'user536103eece459', 'Hello', 'user534fa645dc7d1', 'user536103eece459', 'bid536df3252c72d', 'pro5363598ecf6d3', '2014-07-14 03:14:48', '0'),
-(42, 'CHAT53c541d03cdcf', 'user5368cebf96e8b', 'Hi', 'user534fa645dc7d1', 'user5368cebf96e8b', 'bid53887dc667f7d', 'pro536358c66710b', '2014-07-15 08:29:28', '0'),
-(43, 'CHAT53c5435285f66', 'user534fa645dc7d1', 'hello', 'user534fa645dc7d1', 'user5368cebf96e8b', 'bid53887dc667f7d', 'pro536358c66710b', '2014-07-15 08:35:54', '0'),
-(44, 'CHAT53c5436371827', 'user5368cebf96e8b', 'hows are you?', 'user534fa645dc7d1', 'user5368cebf96e8b', 'bid53887dc667f7d', 'pro536358c66710b', '2014-07-15 08:36:11', '0');
+(26, 'CHAT53c1533e69626', 'user5368cebf96e8b', 'Hi', 'user534fa645dc7d1', 'user5368cebf96e8b', 'bid53887dc667f7d', 'pro536358c66710b', '2014-07-12 08:54:46', '0'),
+(27, 'CHAT53c16ee910a5d', 'user5368cebf96e8b', 'are you there?', 'user534fa645dc7d1', 'user5368cebf96e8b', 'bid53887dc667f7d', 'pro536358c66710b', '2014-07-12 10:52:49', '0'),
+(28, 'CHAT53c16f073bdb8', 'user534fa645dc7d1', 'Yes I am....', 'user534fa645dc7d1', 'user5368cebf96e8b', 'bid53887dc667f7d', 'pro536358c66710b', '2014-07-12 10:53:19', '0'),
+(29, 'CHAT53c16f1c440ed', 'user534fa645dc7d1', 'hii', 'user534fa645dc7d1', 'user5368cebf96e8b', 'bid53887dc667f7d', 'pro536358c66710b', '2014-07-12 10:53:40', '0'),
+(30, 'CHAT53c1801d42ee2', 'user5368cebf96e8b', 'hello\n', 'user534fa645dc7d1', 'user5368cebf96e8b', 'bid53887dc667f7d', 'pro536358c66710b', '2014-07-13 12:06:13', '0'),
+(31, 'CHAT53c1804aefd35', 'user534fa645dc7d1', 'whats up?', 'user534fa645dc7d1', 'user5368cebf96e8b', 'bid53887dc667f7d', 'pro536358c66710b', '2014-07-13 12:06:58', '0'),
+(32, 'CHAT53c1809798c76', 'user5368cebf96e8b', 'working and you?', 'user534fa645dc7d1', 'user5368cebf96e8b', 'bid53887dc667f7d', 'pro536358c66710b', '2014-07-13 12:08:15', '0'),
+(33, 'CHAT53c180a85a596', 'user534fa645dc7d1', 'me too....', 'user534fa645dc7d1', 'user5368cebf96e8b', 'bid53887dc667f7d', 'pro536358c66710b', '2014-07-13 12:08:32', '0'),
+(34, 'CHAT53c180e228cd1', 'user534fa645dc7d1', 'how the project going on?', 'user534fa645dc7d1', 'user5368cebf96e8b', 'bid53887dc667f7d', 'pro536358c66710b', '2014-07-13 12:09:30', '0'),
+(35, 'CHAT53c1816842128', 'user534fa645dc7d1', 'ha ha ha', 'user534fa645dc7d1', 'user5368cebf96e8b', 'bid53887dc667f7d', 'pro536358c66710b', '2014-07-13 12:11:44', '0'),
+(36, 'CHAT53c1821d5b2fa', 'user534fa645dc7d1', 'hello\n', 'user534fa645dc7d1', 'user5368cebf96e8b', 'bid53887dc667f7d', 'pro536358c66710b', '2014-07-13 12:14:45', '0'),
+(37, 'CHAT53c182427254e', 'user5368cebf96e8b', 'to tum kaisi ho', 'user534fa645dc7d1', 'user5368cebf96e8b', 'bid53887dc667f7d', 'pro536358c66710b', '2014-07-13 12:15:22', '0');
 
 -- --------------------------------------------------------
 
@@ -235,7 +214,6 @@ CREATE TABLE IF NOT EXISTS `files_info` (
 CREATE TABLE IF NOT EXISTS `milestone_info` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `milestone_id` varchar(200) NOT NULL,
-  `workroom_id` varchar(300) NOT NULL,
   `project_id` varchar(200) NOT NULL,
   `emp_user_id` varchar(200) DEFAULT NULL,
   `con_user_id` varchar(200) DEFAULT NULL,
@@ -389,10 +367,10 @@ CREATE TABLE IF NOT EXISTS `project_info` (
 
 INSERT INTO `project_info` (`id`, `project_id`, `title`, `description`, `user_id`, `category`, `sub_category`, `skills`, `file_or`, `file`, `date`, `time`, `work_type`, `price_range`, `hour_per_week`, `hourly_time_frame`, `job_post_ip`, `ending_date`, `preferred_locations`, `total_bids`, `award_bid_id`, `activation_notes`, `status`) VALUES
 (1, 'pro535a050d029eb', 'Html Design', 'sd fsdert try rtytyghjg jghj gj fgh fh \r\nd fg\r\ndsg dg la[dsgf as\r\naf sajfpsdf\r\nsdfhs dof s\r\nfsof''sfps\r\nfsfj s\r\nfs\r\nf f dsfa', 'user534fa645dc7d1', 'Category3', 'Sub Category 3', 'Skills 2,Skills 4,Skills 11,Skills 12', NULL, '', '2014-04-25', '08:47:41', 'Fixed', '$100 to $200', NULL, NULL, '::1', '2014-06-30', 'india', 1, NULL, NULL, '1'),
-(17, 'pro5361055c3eb15', 'Web Solution', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.\r\nLorem Ipsum is simply dummy text of the printing and typesetting industry.\r\nLorem Ipsum is simply dummy text of the printing and typesetting industry.\r\nLorem Ipsum is simply dummy text of the printing and typesetting industry.', 'user534fa645dc7d1', 'Category2', 'Sub Category 3', 'Skills 1,Skills 3,Skills 4,Skills 10,Skills 11,Skills 12', 'abcd.txt', 'files/project/3bc248e2d9c1acf80200ec3d8ee65f12.txt', '2014-04-30', '04:14:52', 'Fixed', '$500 to $1000', NULL, NULL, '::1', '2014-06-30', 'Any Where', 1, 'bid536dfcb1913ba', NULL, '1'),
+(17, 'pro5361055c3eb15', 'Web Solution', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.\r\nLorem Ipsum is simply dummy text of the printing and typesetting industry.\r\nLorem Ipsum is simply dummy text of the printing and typesetting industry.\r\nLorem Ipsum is simply dummy text of the printing and typesetting industry.', 'user534fa645dc7d1', 'Category2', 'Sub Category 3', 'Skills 1,Skills 3,Skills 4,Skills 10,Skills 11,Skills 12', 'abcd.txt', 'files/project/3bc248e2d9c1acf80200ec3d8ee65f12.txt', '2014-04-30', '04:14:52', 'Fixed', '$500 to $1000', NULL, NULL, '::1', '2014-06-30', 'Any Where', 1, NULL, NULL, '1'),
 (18, 'pro5363584075106', 'Web Solution', 'I have a website with new domain. I want responsive design for my site. I will discuss the details of work after I choose the right person for it. Place your bids according to the requirement. You can freely ask your doubts.I have a website with new domain. I want responsive design for my site. I will discuss the details of work after I choose the right person for it. Place your bids according to the requirement. You can freely ask your doubts.', 'user534fa645dc7d1', 'Category5', 'Sub Category 3', 'Skills 1,Skills 2,Skills 3,Skills 4,Skills 6,Skills 7', NULL, '', '2014-05-02', '10:33:04', 'Hourly', '$15/hr to $20/hr', 40, '3-4 weeks', '::1', '2014-06-30', 'Any Where', 0, NULL, NULL, '1'),
-(19, 'pro536358c66710b', 'normal project', 'I have a website with new domain. I want responsive design for my site. I will discuss the details of work after I choose the right person for it. Place your bids according to the requirement. You can freely ask your doubts.I have a website with new domain. I want responsive design for my site. I will discuss the details of work after I choose the right person for it. Place your bids according to the requirement. You can freely ask your doubts.', 'user534fa645dc7d1', 'Category2', 'Sub Category 2', 'Skills 2,Skills 3,Skills 4', NULL, '', '2014-05-02', '10:35:18', 'Fixed', '$50 to $80', NULL, NULL, '::1', '2014-06-30', 'Any Where', 1, 'bid53887dc667f7d', NULL, '1'),
-(20, 'pro5363598ecf6d3', 'Web Development', 'I have a website with new domain. I want responsive design for my site. I will discuss the details of work after I choose the right person for it. Place your bids according to the requirement. You can freely ask your doubts.I have a website with new domain.\r\n', 'user534fa645dc7d1', 'Category2', 'Sub Category 5', 'Skills 1,Skills 2,Skills 3', NULL, '', '2014-05-02', '10:38:38', 'Fixed', 'Less than $500', NULL, NULL, '::1', '2014-06-30', 'Any Where', 1, NULL, ' jhgjfuy turtyrtyrety', '1'),
+(19, 'pro536358c66710b', 'normal project', 'I have a website with new domain. I want responsive design for my site. I will discuss the details of work after I choose the right person for it. Place your bids according to the requirement. You can freely ask your doubts.I have a website with new domain. I want responsive design for my site. I will discuss the details of work after I choose the right person for it. Place your bids according to the requirement. You can freely ask your doubts.', 'user534fa645dc7d1', 'Category2', 'Sub Category 2', 'Skills 2,Skills 3,Skills 4', NULL, '', '2014-05-02', '10:35:18', 'Fixed', '$50 to $80', NULL, NULL, '::1', '2014-06-30', 'Any Where', 1, NULL, NULL, '1'),
+(20, 'pro5363598ecf6d3', 'Web Development', 'I have a website with new domain. I want responsive design for my site. I will discuss the details of work after I choose the right person for it. Place your bids according to the requirement. You can freely ask your doubts.I have a website with new domain.\r\n', 'user534fa645dc7d1', 'Category2', 'Sub Category 5', 'Skills 1,Skills 2,Skills 3', NULL, '', '2014-05-02', '10:38:38', 'Fixed', 'Less than $500', NULL, NULL, '::1', '2014-06-30', 'Any Where', 1, 'bid536df3252c72d', ' jhgjfuy turtyrtyrety', '1'),
 (21, 'pro5371ba8601539', 'Test Job', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry', 'user536103eece459', 'Category4', 'Sub Category 2', 'Skills 1,Skills 2,Skills 3,Skills 4,Skills 10,Skills 11', '', '', '2014-05-13', '08:24:06', 'Fixed', '$100 to $250', NULL, NULL, '::1', '2014-06-30', 'india', 0, NULL, NULL, '1'),
 (22, 'pro5371bb257a34c', 'yryiure', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry', 'user536103eece459', 'Category3', 'Sub Category 4', 'Skills 1,Skills 2,Skills 3,Skills 4,Skills 5,Skills 8,Skills 11', '', '', '2014-05-13', '08:26:45', 'Fixed', 'Less than $500', NULL, NULL, '::1', '2014-06-30', 'india', 1, NULL, NULL, '1'),
 (23, 'pro537b1b70de3b7', 'Testing purpose', 'abc is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industrjjgh jghj ghjg Ipsum is simply dummy text of the printing typesetting industry.Lorem Ipsum is simply dummy text of the printing and tyjdgf djsgfis..', 'user536103eece459', 'Category4', 'Sub Category 3', 'Skills 1,Skills 2,Skills 3,Skills 4,Skills 10,Skills 11', '', '', '2014-05-20', '11:08:00', 'Fixed', '$500 to $1000', NULL, NULL, '::1', '2014-07-19', 'Any Where', 2, NULL, NULL, '1'),
@@ -716,9 +694,9 @@ CREATE TABLE IF NOT EXISTS `user_credentials` (
 --
 
 INSERT INTO `user_credentials` (`id`, `user_id`, `email_id`, `username`, `password`, `category`, `reset_pass_token`, `reset_pass_sent_addr`, `sign_in_count`, `last_sign_in_ip`, `date`, `status`) VALUES
-(13, 'user534fa645dc7d1', 'dipanjan@vyrazu.com', 'test', 'e10adc3949ba59abbe56e057f20f883e', 'employer', NULL, NULL, 56, '127.0.0.1', '2014-07-16 02:49:11', '1'),
-(14, 'user536103eece459', 'abcd@abc.com', 'dipa', 'b51e8dbebd4ba8a8f342190a4b9f08d7', 'employer', NULL, NULL, 28, '127.0.0.1', '2014-07-14 03:10:43', '1'),
-(15, 'user5368cebf96e8b', 'abcd@gmail.com', 'abcd', 'e80b5017098950fc58aad83c8c14978e', 'contractor', NULL, NULL, 32, '127.0.0.1', '2014-07-15 07:27:19', '1');
+(13, 'user534fa645dc7d1', 'dipanjan@vyrazu.com', 'test', 'e10adc3949ba59abbe56e057f20f883e', 'employer', NULL, NULL, 53, '127.0.0.1', '2014-07-11 06:02:55', '1'),
+(14, 'user536103eece459', 'abcd@abc.com', 'dipa', 'b51e8dbebd4ba8a8f342190a4b9f08d7', 'employer', NULL, NULL, 26, '127.0.0.1', '2014-07-12 08:17:24', '1'),
+(15, 'user5368cebf96e8b', 'abcd@gmail.com', 'abcd', 'e80b5017098950fc58aad83c8c14978e', 'contractor', NULL, NULL, 31, '127.0.0.1', '2014-07-12 08:18:52', '1');
 
 -- --------------------------------------------------------
 
@@ -861,20 +839,16 @@ CREATE TABLE IF NOT EXISTS `workroom_info` (
   `workroom_id` varchar(200) NOT NULL,
   `project_id` varchar(200) NOT NULL,
   `bid_id` varchar(200) NOT NULL,
+  `milestone_id` varchar(200) NOT NULL,
+  `chat_id` varchar(200) NOT NULL,
+  `file_id` varchar(200) NOT NULL,
   `emp_user_id` varchar(200) NOT NULL,
   `con_user_id` varchar(200) NOT NULL,
   `date` date NOT NULL,
   `time` time NOT NULL,
   `job_status` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
-
---
--- Dumping data for table `workroom_info`
---
-
-INSERT INTO `workroom_info` (`id`, `workroom_id`, `project_id`, `bid_id`, `emp_user_id`, `con_user_id`, `date`, `time`, `job_status`) VALUES
-(8, 'wkrm53c591c780a8f', 'pro536358c66710b', 'bid53887dc667f7d', 'user5368cebf96e8b', 'user534fa645dc7d1', '2014-07-02', '02:10:39', '1');
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 --
 -- Constraints for dumped tables

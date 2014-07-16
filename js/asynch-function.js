@@ -270,6 +270,7 @@ $(document).ready(function(e) {
 					$('').html('');
 				  },
 				success:function(result){
+					alert(result);
 					location.reload();
 					return false;
 			}});

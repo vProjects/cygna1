@@ -1408,54 +1408,94 @@
 		function getUserJobList($user_id)
 		{
 			//getting bid list
-			$bids = $this->manage_content->getValueMultipleCondtnDesc("bid_info","*",array("user_id","status"),array($user_id,1));
-			if(!empty($bids[0]))
+			$awarded = $this->manage_content->getValue_where("award_info","*",'employer_id',$user_id);
+			
+			if(!empty($awarded))
 			{
-				foreach($bids as $bid)
+				foreach($awarded as $awarded_jobs)
 				{
 					//getting project details
-					$pro_details = $this->manage_content->getValue_where("project_info","*","project_id",$bid['project_id']);
+					$pro_details = $this->manage_content->getValue_where("project_info","*","project_id",$awarded_jobs['project_id']);
+
 					//getting user details of project post
 					$project_user = $this->manage_content->getValue_where("user_info","*","user_id",$pro_details[0]['user_id']);
-					if(!empty($project_user[0]['profile_image']))
-					{
-						$pro_pic = $project_user[0]['profile_image'];
-					}
-					else
-					{
-						$pro_pic = 'files/pro-image/dummy.png';
-					}
 					
+					//get the bid details
+					$bid_details = $this->manage_content->getValue_where("bid_info","*","bid_id",$awarded_jobs['bid_id']);
 					
 					echo '<div class="project_details_outline post_bid_proposal_list">
-							<div class="col-md-2 post_bid_proposal_image_outline">
-								<img src="'.$pro_pic.'" class="center-block" />
-							</div>
-							<div class="col-md-10 post_bid_proposal_outline">
-								<div class="project_title_text post_bid_bidder_name"><a href="post_bid.php?bid='.$bid['bid_id'].'">'.$pro_details[0]['title'].'</a></div>
-								<p class="project_part_description">'.substr($bid['description'],0,500).'</p>
-								
-								<p class="post_bid_info_outline"><span class="post_bid_info_topic">Price:</span> '.$bid['currency'].$bid['amount'].'</p>
-								<p class="post_bid_info_outline"><span class="post_bid_info_topic">Time Range:</span> '.$bid['time_range'].'</p>';
-					//setting job accept or decline btn
-					if($bid['awarded'] == 1 && $pro_details[0]['award_bid_id'] == $bid['bid_info'])
-					{
-						echo '<div class="col-md-6">
-									<form action="v-includes/class.formData.php" method="post">
-										<input type="hidden" name="bid" value="'.$bid['bid_id'].'" />
-										<input type="hidden" name="fn" value="'.md5('accept_award').'" />
-										<input type="submit" class="btn btn-success btn-lg" value="Accept This Job" />
-									</form>
+							<div class="col-md-12 post_bid_proposal_outline">
+								<div class="row">
+									<div class="project_title_text post_bid_bidder_name col-md-12"><a href="post_bid.php?bid='.$awarded_jobs['bid_id'].'">'.$pro_details[0]['title'].'</a></div>
 								</div>
-								<div class="col-md-6">
-									<form action="v-includes/class.formData.php" method="post">
-										<input type="hidden" name="bid" value="'.$bid['bid_id'].'" />
-										<input type="hidden" name="fn" value="'.md5('decline_award').'" />
-										<input type="submit" class="btn btn-danger btn-lg" value="Decline The Job" />
-									</form>
+								<div class="row">
+									<div class="post_bid_bidder_name col-md-12">'.substr($pro_details[0]['description'],0,500).'</div>
+								</div>
+								<div class="row">
+									<div class="col-md-3 col-lg-3 col-sm-4 col-xs-4">
+										<p class="bid_specs"><span class="post_bid_info_topic"><span class="glyphicon glyphicon-euro glyph"></span> Price:</span> '.$pro_details[0]['currency'].$pro_details[0]['price_range'].'</p>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-4 col-lg-4 col-sm-4 col-xs-4 submitted_on">
+										<p class="bid_specs">Submitted on: '.$bid_details[0]['date'].'&nbsp&nbsp'.$bid_details[0]['time'].'</p>
+									</div>
 								</div>';
+					
+					//setting job accept or decline btn
+					if($awarded_jobs['is_accepted'] != 1 && $awarded_jobs['is_declined'] != 1)
+					{
+						
+						echo '<div class="pull-right">
+								<button class="expand-bid pull-right txt-14-1" onclick="declineit('."'".$bid_details[0]['bid_id']."'".')">
+									<p class="pull-right txt-14-1">Decline</p>
+									<span class="pull-right glyphicon glyphicon-remove glyph"></span>
+								</button>
+							</div>
+							<div class="pull-right">
+								<button class="expand-bid pull-right txt-14-1" onclick="acceptit('."'".$bid_details[0]['bid_id']."'".')">
+									<p class="pull-right txt-14-1">Accept</p>
+									<span class="pull-right glyphicon glyphicon-ok-circle glyph"></span>
+								</button>
+							</div>';
 					}
-					echo '</div>
+					if( $awarded_jobs['is_accepted'] == 1 )
+					{
+						//get the workroom info
+						$workroom = $this->manage_content->getValue_where("workroom_info","*","project_id",$awarded_jobs['project_id']);
+						
+						echo '<div class="pull-right">
+								<div class="bid-accept-status pull-right txt-14-1">
+									<p class="pull-right txt-14-1">PROJECT ACCEPTED</p>
+									<span class="pull-right glyphicon glyphicon-ok-circle glyph"></span>
+								</div>
+							</div>
+							<div class="pull-right">
+								<a href="workroom.php?wid='.$workroom[0]['workroom_id'].'">
+									<div class="bid-accept-status bid-accept-status_h pull-right txt-14-1">
+										<p class="pull-right txt-14-1">WORKROOM</p>
+										<span class="pull-right glyphicon glyphicon-folder-open glyph"></span>
+									</div>
+								</a>
+							</div>';
+					}
+					if( $awarded_jobs['is_declined'] == 1 )
+					{
+						echo '<div class="pull-right">
+								<div class="bid-accept-status pull-right txt-14-1">
+									<p class="pull-right txt-14-1">PROJECT DECLINED</p>
+									<span class="pull-right glyphicon glyphicon-remove glyph"></span>
+								</div>
+							</div>';
+					}
+					echo '
+							<div class="expand-bid pull-right">
+								<a href="message.php?bid='.$bid_details[0]['bid_id'].'">
+									<p class="pull-right txt-14-1">MESSAGGE</p>
+									<span class="pull-right glyphicon glyphicon-comment glyph"></span>
+								</a>
+							</div>
+							</div>
 						<div class="clearfix"></div>
 					</div>';
 				}
@@ -2576,6 +2616,7 @@
 				{
 					//get the project name
 					$project_name = $this->manage_content->getValue_where("project_info","*","project_id",$message['project_id']);
+					$workroom = $this->manage_content->getValue_where("workroom_info","*","project_id",$message['project_id']);
 					
 					if( $message['sender'] != $user_id )
 					{
@@ -2584,7 +2625,16 @@
 							echo '<div class="chat_part_outline">
 	                                <div class="col-md-12 col-sm-12 col-xs-12">
 	                                    <div class="chat_user_msg">
-	                                        <a href="message.php?bid='.$message['bid_id'].'"><p><span class="glyphicon glyphicon-envelope glyph glyph-unread"></span><strong>'.$message['message'].'</strong></p></a>
+	                                        <a href="';
+							if( !empty($workroom) )
+							{
+								echo 'workroom.php?wid='.$workroom[0]['workroom_id'];
+							}
+							else
+							{
+								echo 'message.php?bid='.$message['bid_id'];
+							}
+	                        echo '"><p><span class="glyphicon glyphicon-envelope glyph glyph-unread"></span><strong>'.$message['message'].'</strong></p></a>
 	                                        <a href="#"><p class="pull-left chat_user_msg_date"><span>'.$project_name[0]['title'].'</span></p></a>
 	                                        <p class="pull-right chat_user_msg_date"><span>'.$message['date'].'</span></p>
 	                                        <div class="clearfix"></div>
@@ -2598,7 +2648,16 @@
 							echo '<div class="chat_part_outline">
 	                                <div class="col-md-12 col-sm-12 col-xs-12">
 	                                    <div class="chat_user_msg">
-	                                        <a href="message.php?bid='.$message['bid_id'].'"><p><span class="glyphicon glyphicon-envelope glyph"></span>'.$message['message'].'</p></a>
+	                                        <a href="';
+							if( !empty($workroom) )
+							{
+								echo 'workroom.php?wid='.$workroom[0]['workroom_id'];
+							}
+							else
+							{
+								echo 'message.php?bid='.$message['bid_id'];
+							}
+							echo '"><p><span class="glyphicon glyphicon-envelope glyph"></span>'.$message['message'].'</p></a>
 	                                        <a href="#"><p class="pull-left chat_user_msg_date"><span>'.$project_name[0]['title'].'</span></p></a>
 	                                        <p class="pull-right chat_user_msg_date"><span>'.$message['date'].'</span></p>
 	                                        <div class="clearfix"></div>
@@ -2655,9 +2714,9 @@
 		 function getAwardedJobNumber($user_id,$type)
 		 {
 		 	//initialize the table name
-		 	$table = 'bid_info';
+		 	$table = 'award_info';
 
-		 	$jobs = $this->manage_content->getValue_where($table,"*","user_id",$user_id);
+		 	$jobs = $this->manage_content->getValue_where($table,"*","employer_id",$user_id);
 			
 			if( !empty($jobs) )
 			{
@@ -2666,6 +2725,97 @@
 			else
 			{
 				return 0;	
+			}
+		 }
+		 
+		 /*
+		  * @Singh 
+		  */
+		 function getBidIdFromWid($wid)
+		 {
+		 	$workroom = $this->manage_content->getValue_where('workroom_info','*','workroom_id',$wid);
+			
+			if( !empty($workroom) )
+			{
+				return $workroom[0]['bid_id'];
+			}
+			else
+			{
+				return 0;
+			}
+		 }
+		 
+		 /*
+		  * @Singh 
+		  */
+		 function isEmployer($user_id,$wid)
+		 {
+		 	$workroom = $this->manage_content->getValue_where('workroom_info','*','workroom_id',$wid);
+			
+			if( !empty($workroom) )
+			{
+				return $workroom[0]['bid_id'];
+			}
+			else
+			{
+				return 0;
+			}
+		 }
+		 
+		 /*
+		  * Method generates the Full UI for Escrow and project details
+		  * @Param workroom id
+		  * Auth: Singh 
+		  */
+		 function getProjectEscrowInfo($wid)
+		 {
+		 	$workroom = $this->manage_content->getValue_where('workroom_info','*','workroom_id',$wid);
+			
+			//get the project info
+			$project = $this->manage_content->getValue_where('project_info','*','project_id',$workroom[0]['project_id']);
+			
+			//get the bid info
+			$bid = $this->manage_content->getValue_where('bid_info','*','bid_id',$workroom[0]['bid_id']);
+			
+			//get the user_info
+			$employer =  $this->manage_content->getValue_where('user_info','*','user_id',$project[0]['user_id']);
+			
+			if( !empty($employer) )
+			{
+				echo '<div class="col-md-4 pull-left billing_info_left_part">
+                            <p class="billing_info_para">
+                                <span class="billing_info_heading">Client:</span>
+                                <span class="billing_info_text">'.$employer[0]['name'].'</span>
+                            </p>
+                            <p class="billing_info_para">
+                                <span class="billing_info_heading">Type:</span>
+                                <span class="billing_info_text">'.$project[0]['work_type'].'</span>
+                            </p>
+                            <p class="billing_info_para">
+                                <span class="billing_info_heading">Payment:</span>
+                                <span class="billing_info_text">Escrow</span>
+                            </p>
+                        </div>
+                        <div class="col-md-4 pull-right billing_info_right_part">
+                        	<div class="financial_summary_heading">finanacial summary</div>
+                            <p class="billing_info_para">
+                                <span class="billing_info_heading">Project Amount:</span>
+                                <span class="billing_info_text">'.$bid[0]['currency'].$bid[0]['amount'].'</span>
+                            </p>
+                            <p class="billing_info_para">
+                                <span class="billing_info_heading">Escrow Amount:</span>
+                                <span class="billing_info_text">'.$bid[0]['currency'].'00</span>
+                            </p>
+                            <p class="billing_info_para">
+                                <span class="billing_info_heading">Released Amount:</span>
+                                <span class="billing_info_text">'.$bid[0]['currency'].'00</span>
+                            </p>
+							<p class="tax-txt"><a href="#">Enter TAX or VAT Id information</a></p>
+                        </div>';
+			}
+			else
+			{
+				return 0;
 			}
 		 }
 	}

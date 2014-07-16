@@ -6,6 +6,12 @@
 		header("Location: log_in.php");
 	}
 	include ("v-templates/header.php");
+	
+	if(isset($GLOBALS['_GET']['wid']))
+	{
+		$wid = $GLOBALS['_GET']['wid'];
+		$bid_id = $manageContent->getBidIdFromWid($_GET['wid']);
+	}
 ?>
 <?php
 	//including post header to this page
@@ -47,37 +53,10 @@
                     <div class="billing_box_inner">
                     	<div class="billing_page_heading">Escrow and Release Information</div>
                         <div class="billing_info_outline">
-                        
-                            <div class="col-md-4 pull-left billing_info_left_part">
-                                <p class="billing_info_para">
-                                    <span class="billing_info_heading">Client:</span>
-                                    <span class="billing_info_text">Lorem Ipsum</span>
-                                </p>
-                                <p class="billing_info_para">
-                                    <span class="billing_info_heading">Type:</span>
-                                    <span class="billing_info_text">Fixed</span>
-                                </p>
-                                <p class="billing_info_para">
-                                    <span class="billing_info_heading">Payment:</span>
-                                    <span class="billing_info_text">Escrow</span>
-                                </p>
-                            </div>
-                            <div class="col-md-4 pull-right billing_info_right_part">
-                            	<div class="financial_summary_heading">finanacial summary</div>
-                                <p class="billing_info_para">
-                                    <span class="billing_info_heading">Project Amount:</span>
-                                    <span class="billing_info_text">$3000</span>
-                                </p>
-                                <p class="billing_info_para">
-                                    <span class="billing_info_heading">Escrow Amount:</span>
-                                    <span class="billing_info_text">$7000</span>
-                                </p>
-                                <p class="billing_info_para">
-                                    <span class="billing_info_heading">Released Amount:</span>
-                                    <span class="billing_info_text">$3000</span>
-                                </p>
-								<p class="tax-txt"><a href="#">Enter TAX or VAT Id information</a></p>
-                            </div>
+                        	<?php
+                        		//get Escrow and project details
+                        		$manageContent->getProjectEscrowInfo($_GET['wid']);
+                        	?>
                             <div class="col-md-12 billing_details_table_outline">
                                 <table class="table table-hover table-responsive billing_details_table">
                                     <thead>

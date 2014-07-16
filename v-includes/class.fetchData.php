@@ -363,27 +363,41 @@
 		{
 			//checking that bid id is present or not
 			$bid_details = $this->manageContent->getValue_where("bid_info","*","bid_id",$bid_id);
-			if(!empty($bid_details[0]['bid_id']))
+			
+			if(!empty($bid_details))
 			{
-				//update the award field of table
-				$update = $this->manageContent->updateValueWhere("bid_info","awarded",1,"bid_id",$bid_id);
-				//update award_bid_id field in project info table
-				$upd = $this->manageContent->updateValueWhere("project_info","award_bid_id",$bid_id,"project_id",$bid_details[0]['project_id']);
+				//get the project details on which bid is made
+				$project_details = $this->manageContent->getValue_where("project_info","*","project_id",$bid_details[0]['project_id']);
 				
-				//create the variables
-				$award_id = uniqid('AWA');
-				$workroom_id = uniqid('WKRM');
-				$project_id = $bid_details[0]['project_id'];
-				$employer_id = $bid_details[0]['employer_id'];
-				$contractor_id = $bid_details[0]['contractor_id'];
-				$date = date('Y-m-h');
-				$time = date('h:i:s');
-				
-				//check whether chat id exists or not
-				
-				
-				//`(`id`, `award_id`, `project_id`, `bid_id`, `employer_id`, `contractor_id`, `is_accepted`, `status`)
-				//(`id`, `workroom_id`, `project_id`, `bid_id`, `chat_id`, `emp_user_id`, `con_user_id`, `date`, `time`, `job_status`)
+				//check whether the bid has been awarded or not
+				$awarded = $this->manageContent->getValue_where('award_info','*','bid_id',$bid_id);
+				if( empty($awarded) )
+				{
+					//update the award field of table
+					$update = $this->manageContent->updateValueWhere("bid_info","awarded",1,"bid_id",$bid_id);
+					
+					//update award_bid_id field in project info table
+					$upd = $this->manageContent->updateValueWhere("project_info","award_bid_id",$bid_id,"project_id",$bid_details[0]['project_id']);
+					
+					//create the variables
+					$award_id = uniqid('awa');
+					$project_id = $bid_details[0]['project_id'];
+					$employer_id = $bid_details[0]['user_id'];
+					$contractor_id = $project_details[0]['user_id'];
+					$date = date('Y-m-h h:i:s');
+					
+					//insert the award_info
+					$column_name_award = array("award_id","project_id","bid_id","employer_id","contractor_id","awarded_date","is_accepted","result_date","is_declined","status");
+					$column_value_award = array($award_id,$project_id,$bid_id,$employer_id,$contractor_id,$date,0,"0000-00-00 00:00:00",0,1);
+					$insert = $this->manageContent->insertValue("award_info",$column_name_award,$column_value_award);
+					
+					
+					echo 'Successfully Awarded.';
+				}
+				else
+				{
+					echo 'Already awarded';
+				} 
 			}
 		}
 		
@@ -460,6 +474,65 @@
 			else
 			{
 				echo 0;
+			}
+		}
+		
+		/*
+		- method responsible for accepting job
+		- creates work room
+		- Auth: Singh
+		*/
+		function acceptJob($postData)
+		{
+			//get the bid information
+			$bid_details = $this->manageContent->getValue_where('bid_info','*','bid_id',$postData['bid']);
+			
+			//get the project details on which bid is made
+			$project_details = $this->manageContent->getValue_where("project_info","*","project_id",$bid_details[0]['project_id']);
+			
+			//check for the valid contractor
+			if( $_SESSION['user_id'] == $bid_details[0]['user_id'] && !empty($project_details) )
+			{
+				//update the accept flag
+				$update_1 = $this->manageContent->updateValueWhere("award_info","is_accepted",1,"bid_id",$postData['bid']);
+				$update_2 = $this->manageContent->updateValueWhere("award_info","result_date",date('Y-m-d g:i:s'),"bid_id",$postData['bid']);
+				
+				//create a work room for the job
+				if( $update_1 == 1 && $update_2 == 1 )
+				{
+					//create the variables
+					$workroom_id = uniqid('wkrm');
+					$project_id = $bid_details[0]['project_id'];
+					$employer_id = $bid_details[0]['user_id'];
+					$contractor_id = $project_details[0]['user_id'];
+					$date = date('Y-m-h');
+					$time = date('h:i:s');
+					
+					//insert the values
+					$column_name = array("workroom_id", "project_id", "bid_id", "emp_user_id", "con_user_id", "date", "time", "job_status");
+					$column_value = array($workroom_id, $project_id, $postData['bid'], $employer_id, $contractor_id, $date, $time,1);
+					$insert = $this->manageContent->insertValue("workroom_info",$column_name,$column_value);
+				}
+			}
+			else
+			{
+				echo 'Please try again.';
+			}
+		}
+		
+		/*
+		- method responsible for declining job
+		- Auth: Singh
+		*/
+		function declineJob($postData)
+		{
+			//update the accept flag
+			$update_1 = $this->manageContent->updateValueWhere("award_info","is_declined",1,"bid_id",$postData['bid']);
+			$update_2 = $this->manageContent->updateValueWhere("award_info","result_date",date('Y-m-d g:i:s'),"bid_id",$postData['bid']);
+			
+			if( $update_1 == 1 && $update_2 == 1 )
+			{
+				echo "Successfully declined.";
 			}
 		}
 			
@@ -556,6 +629,18 @@
 		case 'getMsgNotification':
 		{
 			$fetchData->getMsgNotification($GLOBALS['_POST']);
+			break;
+		}
+		//for accepting a job
+		case 'acceptJob':
+		{
+			$fetchData->acceptJob($GLOBALS['_POST']);
+			break;
+		}
+		//for decline a job
+		case 'declineJob':
+		{
+			$fetchData->declineJob($GLOBALS['_POST']);
 			break;
 		}
 		default:

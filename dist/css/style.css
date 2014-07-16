@@ -409,9 +409,9 @@ a:hover{
 	border: 1px solid #cdcdcd;
 }
 .profile_box_heading{
-	background-color:#eaeaea;
+	background-color: #eaeaea;
 	padding:0.4em 0.6em;
-	color:#7a7575;
+	color: #7a7575;
 	border-bottom:1px solid #cdcdcd;
 	font-size:1.4em;
 }
@@ -1629,4 +1629,25 @@ border-top-right-radius: 5px;
 .submitted_on {
     margin-top: 10px;
     color: #0B6121;
+}
+.bid-accept-status {
+	background-color: #02b7dd;
+    border: 1px solid #02b7dd;
+    padding: 6px 16px 5px 11px;
+    color: #fff;
+    transition: ease-in 0.3s all 0s;
+    margin-left: 2px;
+}
+.bid-accept-status_h:hover {
+	color: #454341;
+	background-color: #fff;
+	border: 1px solid #454341;
+}
+.job-count {
+	background-color: #02b7dd;
+    border: 1px solid;
+	color: #fff;
+	padding: 0px 8px;
+	font-size: 14px;
+	border-radius: 0;
 }
