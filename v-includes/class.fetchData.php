@@ -382,8 +382,8 @@
 					//create the variables
 					$award_id = uniqid('awa');
 					$project_id = $bid_details[0]['project_id'];
-					$employer_id = $bid_details[0]['user_id'];
-					$contractor_id = $project_details[0]['user_id'];
+					$contractor_id = $bid_details[0]['user_id'];
+					$employer_id = $project_details[0]['user_id'];
 					$date = date('Y-m-h h:i:s');
 					
 					//insert the award_info

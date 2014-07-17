@@ -1279,6 +1279,9 @@
 				{
 					//getting the personal info of bidder
 					$perInfo = $this->manage_content->getValue_where("user_info","*","user_id",$bid['user_id']);
+					//get the workroom info
+					$workroom = $this->manage_content->getValue_where('workroom_info','*','project_id',$bid['project_id']);
+					
 					//getting profile pic
 					if(!empty($perInfo[0]['profile_image']))
 					{
@@ -1321,8 +1324,18 @@
 												<p class="pull-right txt-14-1">View</p>
 												<span class="pull-right glyphicon glyphicon-resize-full glyph"></span>
 											</a>
-										</div>
-									</p>';
+										</div>';
+							//if workroom exsist
+							if( !empty($workroom) )
+							{
+								echo '<div class="bid-accept-status bid-accept-status_h pull-right txt-14-1">
+											<a href="workroom.php?wid='.$workroom[0]['workroom_id'].'">
+												<p class="pull-right txt-14-1">Workroom</p>
+												<span class="pull-right glyphicon glyphicon-folder-open glyph"></span>
+											</a>
+										</div>';
+							}
+							echo '</p>';
 						}
 						else
 						{
@@ -1433,7 +1446,7 @@
 								</div>
 								<div class="row">
 									<div class="col-md-3 col-lg-3 col-sm-4 col-xs-4">
-										<p class="bid_specs"><span class="post_bid_info_topic"><span class="glyphicon glyphicon-euro glyph"></span> Price:</span> '.$pro_details[0]['currency'].$pro_details[0]['price_range'].'</p>
+										<p class="bid_specs"><span class="post_bid_info_topic"><span class="glyphicon glyphicon-euro glyph"></span> Price:</span> '.$bid_details[0]['currency'].$pro_details[0]['price_range'].'</p>
 									</div>
 								</div>
 								<div class="row">
@@ -2744,20 +2757,42 @@
 				return 0;
 			}
 		 }
-		 
-		 /*
-		  * @Singh 
-		  */
-		 function isEmployer($user_id,$wid)
+
+		/*
+		 * @Singh 
+		 */
+		 function getProjectId($wid)
 		 {
 		 	$workroom = $this->manage_content->getValue_where('workroom_info','*','workroom_id',$wid);
 			
 			if( !empty($workroom) )
 			{
-				return $workroom[0]['bid_id'];
+				return $workroom[0]['project_id'];
 			}
 			else
 			{
+				return 0;
+			}
+		 }
+		 
+		 /*
+		  * @Singh 
+		  */
+		 function isEmployer($wid)
+		 {
+		 	$workroom = $this->manage_content->getValue_where('workroom_info','*','workroom_id',$wid);
+		 	
+		 	//get the project info
+		 	$project = $this->manage_content->getValue_where('project_info','*','project_id',$workroom[0]['project_id']);
+			
+			if( $_SESSION['user_id'] == $project[0]['user_id'] )
+			{
+				//return true
+				return 1;
+			}
+			else
+			{
+				//return false
 				return 0;
 			}
 		 }
