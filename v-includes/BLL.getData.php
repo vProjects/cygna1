@@ -2814,17 +2814,33 @@
 			
 			//get the user_info
 			$employer =  $this->manage_content->getValue_where('user_info','*','user_id',$project[0]['user_id']);
+			$contractor =  $this->manage_content->getValue_where('user_info','*','user_id',$bid[0]['user_id']);
 			
 			if( !empty($employer) )
 			{
+				if( $bid[0]['user_id'] == $_SESSION['user_id'] )
+				{
+					$name = $employer[0]['name'];
+					$user_id = $employer[0]['user_id'];
+				}
+				if( $project[0]['user_id'] == $_SESSION['user_id'] )
+				{
+					$name = $contractor[0]['name'];
+					$user_id = $contractor[0]['user_id'];
+				}
+				
 				echo '<div class="col-md-4 pull-left billing_info_left_part">
                             <p class="billing_info_para">
-                                <span class="billing_info_heading">Client:</span>
-                                <span class="billing_info_text">'.$employer[0]['name'].'</span>
+                                <span class="billing_info_heading">Working With:</span>
+                                <a href="public-profile.php?uid='.$user_id.'"><span class="billing_info_text">'.$name.'</span></a>
                             </p>
                             <p class="billing_info_para">
                                 <span class="billing_info_heading">Type:</span>
                                 <span class="billing_info_text">'.$project[0]['work_type'].'</span>
+                            </p>
+                            <p class="billing_info_para">
+                                <span class="billing_info_heading">Accepted On:</span>
+                                <span class="billing_info_text">'.$workroom[0]['date'].'</span>
                             </p>
                             <p class="billing_info_para">
                                 <span class="billing_info_heading">Payment:</span>
@@ -2852,6 +2868,78 @@
 			{
 				return 0;
 			}
+		 }
+
+		 /*
+		  * Method generates the Full UI for Escrow and project details
+		  * @Param workroom id
+		  * Auth: Singh 
+		  */
+		 function getProjectMilestoneInfo($wid)
+		 {
+		 	$milestones = $this->manage_content->getValue_where('milestone_info','*','workroom_id',$wid);
+			$workroom = $this->manage_content->getValue_where('workroom_info','*','workroom_id',$wid);
+			//get the bid info
+			$bid = $this->manage_content->getValue_where('bid_info','*','bid_id',$workroom[0]['bid_id']);
+			
+			if( !empty($milestones) )
+			{
+				//initialize the index
+				$i = 0 ;
+				
+				foreach ( $milestones as $milestone )
+				{
+					echo '<tr>
+                        <td>'.$milestone['milestone_name'].'</td>
+						<td><span class="glyphicon glyphicon-file" data-toggle="modal" data-target=".bs-modal-'.$i.'"></span></td>
+                        <td>'.$milestone['start_date'].'</td>
+                        <td>'.$bid[0]['currency'].$milestone['amount'].'</td>
+                        <td>';
+					
+					if( $milestone['funding_status'] != 1 )
+					{
+						echo '<button class="btn btn-sm btn-info">Fund</button> ';
+					}
+					else
+					{
+						echo '<button class="btn btn-sm btn-info" disabled>Funded</button> ';
+					}
+					if( $milestone['release_status'] != 1 )
+					{
+						echo '<button class="btn btn-sm btn-success">Release</button>';
+					}
+					else
+					{
+						echo '<button class="btn btn-sm btn-success" disabled>Released</button>';
+					}
+                    echo '</td>
+                    	</tr>';
+					echo '<div class="modal fade bs-modal-'.$i.'" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+							  <div class="modal-dialog modal-sm">
+							      <div class="modal-content">
+									<div class="modal-header custom-hmodals">
+							          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							          <h4 class="modal-title" id="mySmallModalLabel">Note for '.$milestone['milestone_name'].'</h4>
+							        </div>
+							        <div class="modal-body">'.$milestone['note'].'</div>
+							      </div><!-- /.modal-content -->
+							    </div>
+							 </div>';
+					
+					//increment the index
+					$i++ ;
+				}
+			}
+		 	else
+		 	{
+				echo '<tr>
+                        <td>No milestone.</td>
+						<td><span class="glyphicon glyphicon-file" data-toggle="modal" data-target=""></span></td>
+                        <td>N.A.</td>
+                        <td>N.A.</td>
+                        <td>N.A.</td>
+                    </tr>';
+		 	}	
 		 }
 	}
 	

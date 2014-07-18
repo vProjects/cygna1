@@ -1042,6 +1042,22 @@
 			return $time;
 		}
 		
+		/*
+		- method for creating milestone
+		- Auth: Anand
+		*/
+		function createMilestone($postData)
+		{
+			$milestone_id = uniqid('mil');
+			
+			//setting column name
+			$column_name = array('milestone_id','milestone_name','workroom_id','amount','note','start_date','end_date','funding_status','funding_date','release_status','funding_method');
+			$column_value = array($milestone_id,$postData['milestone_name'],$postData['wid'],$postData['amount'],$postData['description'],$postData['start_date'],$postData['end_date'],0,0,0,'N.A.');
+			//inserting values to database
+			$insert = $this->manageContent->insertValue("milestone_info",$column_name,$column_value);
+			return $insert;
+		}
+		
 	}
 	
 	
@@ -1366,6 +1382,12 @@
 			}
 			header("Location: ../ticket.php");
 			break;
+		}
+		//for creating milestone
+		case md5('createMilestone'):
+		{
+			$create = $formData->createMilestone($GLOBALS['_POST']);
+			header("Location: ../escrow.php?wid=".$GLOBALS['_POST']['wid']);
 		}
 		default:
 		{

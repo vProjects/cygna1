@@ -43,8 +43,11 @@
 		  type: "POST",
 		  data: "refData=getMsgNotification"
 		}).success(function(data) {
-		  notification_div.innerHTML = data;
-		  msg_notification_1.innerHTML = data;
+			if( data != 0 )
+			{
+			  notification_div.innerHTML = data;
+			  msg_notification_1.innerHTML = data;
+			}
 		});
 	}
 	

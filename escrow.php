@@ -63,42 +63,16 @@
                                         <tr>
                                             <th>Milestone</th>
 											<th>Note</th>
-                                            <th>Date</th>
-                                            <th>Contract Amount</th>
+                                            <th>Start Date</th>
+                                            <th>Amount</th>
                                             <th>Fund Escrow</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>Home Page</td>
-											<td><span class="glyphicon glyphicon-file" data-toggle="modal" data-target=".bs-example-modal-sm"></span></td>
-                                            <td>dd-mm-yyyy</td>
-                                            <td><button class="btn btn-sm btn-success">Release</button></td>
-                                            <td><button class="btn btn-sm btn-info">fund</button></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Profile Page</td>
-											<td><span class="glyphicon glyphicon-file" data-toggle="modal" data-target=".bs-example-modal-sm1"></span></td>
-                                            <td>dd-mm-yyyy</td>
-                                            <td>$3000</td>
-											<td><span class="glyphicon glyphicon-ok"></span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Setting page</td>
-											<td><span class="glyphicon glyphicon-file" data-toggle="modal" data-target=".bs-example-modal-sm2"></span></td>
-                                            <td>dd-mm-yyyy</td>
-                                            <td><button class="btn btn-sm btn-success">Release</button></td>
-                                            <td><button class="btn btn-sm btn-info">fund</button></td>
-                                        </tr>
-										
-                                         <tr>
-                                            <td>Other Page</td>
-											<td><span class="glyphicon glyphicon-file" data-toggle="modal" data-target=".bs-example-modal-sm3"></span></td>
-                                            <td>dd-mm-yyyy</td>
-                                            <td>$7000</td>
-											<td><span class="glyphicon glyphicon-ok"></span></td>
-                                        </tr>
-										
+                                    <?php
+                                    	//get the milestones
+                                    	$manageContent->getProjectMilestoneInfo($_GET['wid']);
+                                    ?>
                                     </tbody>
                                 </table>
                             </div>
@@ -129,155 +103,72 @@
 <?php
 	include 'v-templates/post-footer.php';
 ?>
-<!-- modal starts here -->
-<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-sm">
-      <div class="modal-content">
 
-        <div class="modal-header custom-hmodals">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title" id="mySmallModalLabel">Lorem ipsum</h4>
-        </div>
-        <div class="modal-body">
-         If you have any query feel free to contact us our billing team.If you have any query feel free to contact us our billing team.If you have any query feel free to contact us our billing team.
-        </div>
-      </div><!-- /.modal-content -->
-    </div>
-    </div>
-	<div class="modal fade bs-example-modal-sm1" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-sm">
-      <div class="modal-content">
-
-        <div class="modal-header custom-hmodals">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title" id="mySmallModalLabel">Lorem ipsum</h4>
-        </div>
-        <div class="modal-body">
-         If you have any query feel free to contact us our billing team.If you have any query feel free to contact us our billing team.If you have any query feel free to contact us our billing team.
-        </div>
-      </div><!-- /.modal-content -->
-    </div>
-    </div>
-	<div class="modal fade bs-example-modal-sm2" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-sm">
-      <div class="modal-content">
-
-        <div class="modal-header custom-hmodals">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title" id="mySmallModalLabel">Lorem ipsum</h4>
-        </div>
-        <div class="modal-body">
-         If you have any query feel free to contact us our billing team.If you have any query feel free to contact us our billing team.If you have any query feel free to contact us our billing team.
-        </div>
-      </div><!-- /.modal-content -->
-    </div>
-    </div>
-	<div class="modal fade bs-example-modal-sm3" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-sm">
-      <div class="modal-content">
-
-        <div class="modal-header custom-hmodals">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title" id="mySmallModalLabel">Lorem ipsum</h4>
-        </div>
-        <div class="modal-body">
-         If you have any query feel free to contact us our billing team.If you have any query feel free to contact us our billing team.If you have any query feel free to contact us our billing team.
-        </div>
-      </div><!-- /.modal-content -->
-    </div>
-	</div>
 <div class="modal fade milestone" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
   <div class="modal-dialog">
       <div class="modal-content">
 
         <div class="modal-header custom-hmodals">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title" id="mySmallModalLabel">Lorem ipsum</h4>
+          <h4 class="modal-title" id="mySmallModalLabel">Create New Milestone</h4>
         </div>
         <div class="modal-body">
-					<form class="form-horizontal" role="form">
-						  <div class="form-group">
-							<label class="col-sm-5 control-label custom-chk">Milestone Name:</label>
-							<div class="col-sm-7">
-							  <input type="text" class="form-control" id="inputmilestone">
-							</div>
-						  </div>
-						  <div class="form-group">
-							<label class="col-sm-5 control-label custom-chk">Milestone Description: </label>
-							<div class="col-sm-7">
-							 <textarea class="form-control" rows="2"></textarea>
-							</div>
-						  </div>
-						  <div class="form-group">
-							<label class="col-sm-5 control-label custom-chk">Date Of Subscription: </label>
-							<div class="col-sm-2">
-							 <select class="form-control">
-							  <option>1</option>
-							  <option>2</option>
-							  <option>3</option>
-							  <option>4</option>
-							  <option>5</option>
-							  <option>6</option>
-							  <option>7</option>
-							  <option>8</option>
-							  <option>9</option>
-							  <option>10</option>
-							  <option>11</option>
-							  <option>12</option>
-							  <option>13</option>
-							  <option>14</option>
-							  <option>15</option>
-							  <option>16</option>
-							  <option>17</option>
-							  <option>18</option>
-							  <option>19</option>
-							  <option>20</option>
-							  <option>21</option>
-							  <option>22</option>
-							  <option>23</option>
-							  <option>24</option>
-							  <option>25</option>
-							  <option>26</option>
-							  <option>27</option>
-							  <option>28</option>
-							  <option>29</option>
-							  <option>30</option>
-							  <option>31</option>
-							</select>
-							</div>
-							
-							<div class="col-sm-2">
-							 <select class="form-control">
-							 <option>Jan</option>
-							 <option>Feb</option>
-							 <option>Mar</option>
-							 <option>Apr</option>
-							 <option>May</option>
-							 <option>Jun</option>
-							 <option>jul</option>
-							 <option>Aug</option>
-							 <option>Sep</option>
-							 <option>Oct</option>
-							 <option>Nov</option>
-							 <option>Dec</option>
-							 </select>
-							</div>
-							<div class="col-sm-3">
-								<select class="form-control">
-									 <option>2013</option>
-									 <option>2014</option>
-								</select>
-							</div>
-							
-						
-							 <div class="form-group">
-								<div class="col-sm-offset-5 col-sm-7">
-								 <button class="btn btn-primary btn-add">Add</button>
-								</div>
-							</div>
+			<form class="form-horizontal" action="v-includes/class.formData.php" method="post" role="form" enctype="multipart/form-data">
+				  <div class="form-group">
+					<label class="col-sm-5 control-label custom-chk">Milestone Name:</label>
+					<div class="col-sm-7">
+					  <input type="text" class="form-control" name="milestone_name" id="milestoneName" placeholder="Milestone Name">
+					</div>
+				  </div>
+				  <div class="form-group">
+					<label class="col-sm-5 control-label custom-chk">Milestone Description: </label>
+					<div class="col-sm-7">
+					 <textarea class="form-control" name="description" rows="2"></textarea>
+					</div>
+				  </div>
+				  <div class="form-group">
+					<label class="col-sm-5 control-label custom-chk">Milestone Amount:</label>
+					<div class="col-sm-7">
+					  <input type="text" class="form-control" name="amount" placeholder="Amount of the milestone">
+					</div>
+				  </div>
+				  <div class="form-group">
+					<label class="col-sm-5 control-label custom-chk">Start Date:</label>
+					<div class="col-sm-7">
+					  <input type="text" class="form-control" name="start_date" id="date_1" placeholder="Start Date">
+					</div>
+				  </div>
+				  <div class="form-group">
+					<label class="col-sm-5 control-label custom-chk">End Date:</label>
+					<div class="col-sm-7">
+					  <input type="text" class="form-control" name="end_date" id="date_2" placeholder="End Date">
+					</div>
+				  </div>
+					 <div class="form-group">
+						<div class="col-sm-offset-5 col-sm-7">
+						 <input type="hidden" name="fn" value="<?php echo md5(createMilestone); ?>">
+						 <input type="hidden" value="<?php echo $wid; ?>" name="wid" />
+						 <button class="btn btn-primary btn-add">Create Milestone</button>
 						</div>
-					</form>
+					</div>
+				</div>
+			</form>
 		</div>
+		<script type="text/javascript">
+			$('#date_1').datepick({
+				dateFormat: 'yyyy-mm-dd', 
+		    	minDate: new Date(),
+				maxDate: '+3m',
+				showTrigger: '#calImg'
+			});
+			
+			$('#date_2').datepick({
+				dateFormat: 'yyyy-mm-dd', 
+		    	minDate: new Date(),
+				maxDate: '+6m',
+				showTrigger: '#calImg'
+			});
+		</script>
 	</div><!-- /.modal-content -->
    </div>
 </div>

@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost:80
--- Generation Time: Jul 16, 2014 at 03:27 PM
+-- Generation Time: Jul 18, 2014 at 07:11 PM
 -- Server version: 5.5.37-0ubuntu0.14.04.1
--- PHP Version: 5.5.9-1ubuntu4.2
+-- PHP Version: 5.5.9-1ubuntu4.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `cygna_new`
+-- Database: `galacrik_cygnanew`
 --
 
 -- --------------------------------------------------------
@@ -132,7 +132,7 @@ CREATE TABLE IF NOT EXISTS `chat_info` (
   `date` datetime NOT NULL,
   `status` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=45 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=46 ;
 
 --
 -- Dumping data for table `chat_info`
@@ -143,7 +143,8 @@ INSERT INTO `chat_info` (`id`, `chat_id`, `sender`, `message`, `emp_user_id`, `c
 (41, 'CHAT53c3a69075517', 'user536103eece459', 'Hello', 'user534fa645dc7d1', 'user536103eece459', 'bid536df3252c72d', 'pro5363598ecf6d3', '2014-07-14 03:14:48', '0'),
 (42, 'CHAT53c541d03cdcf', 'user5368cebf96e8b', 'Hi', 'user534fa645dc7d1', 'user5368cebf96e8b', 'bid53887dc667f7d', 'pro536358c66710b', '2014-07-15 08:29:28', '0'),
 (43, 'CHAT53c5435285f66', 'user534fa645dc7d1', 'hello', 'user534fa645dc7d1', 'user5368cebf96e8b', 'bid53887dc667f7d', 'pro536358c66710b', '2014-07-15 08:35:54', '0'),
-(44, 'CHAT53c5436371827', 'user5368cebf96e8b', 'hows are you?', 'user534fa645dc7d1', 'user5368cebf96e8b', 'bid53887dc667f7d', 'pro536358c66710b', '2014-07-15 08:36:11', '0');
+(44, 'CHAT53c5436371827', 'user5368cebf96e8b', 'hows are you?', 'user534fa645dc7d1', 'user5368cebf96e8b', 'bid53887dc667f7d', 'pro536358c66710b', '2014-07-15 08:36:11', '0'),
+(45, 'CHAT53c66ba266daa', 'user5368cebf96e8b', 'test message for workroom', 'user534fa645dc7d1', 'user5368cebf96e8b', 'bid53887dc667f7d', 'pro536358c66710b', '2014-07-16 05:40:10', '0');
 
 -- --------------------------------------------------------
 
@@ -235,23 +236,26 @@ CREATE TABLE IF NOT EXISTS `files_info` (
 CREATE TABLE IF NOT EXISTS `milestone_info` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `milestone_id` varchar(200) NOT NULL,
+  `milestone_name` varchar(500) DEFAULT NULL,
   `workroom_id` varchar(300) NOT NULL,
-  `project_id` varchar(200) NOT NULL,
-  `emp_user_id` varchar(200) DEFAULT NULL,
-  `con_user_id` varchar(200) DEFAULT NULL,
+  `amount` varchar(300) NOT NULL,
   `note` varchar(10000) DEFAULT NULL,
   `start_date` date DEFAULT NULL,
-  `start_time` time DEFAULT NULL,
   `end_date` date DEFAULT NULL,
-  `end_time` time DEFAULT NULL,
   `funding_status` varchar(50) DEFAULT NULL,
   `funding_date` date DEFAULT NULL,
-  `funding_time` time DEFAULT NULL,
   `release_status` varchar(50) DEFAULT NULL,
-  `title` varchar(500) DEFAULT NULL,
   `funding_method` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `milestone_info`
+--
+
+INSERT INTO `milestone_info` (`id`, `milestone_id`, `milestone_name`, `workroom_id`, `amount`, `note`, `start_date`, `end_date`, `funding_status`, `funding_date`, `release_status`, `funding_method`) VALUES
+(2, 'mil53c82e529c4a6', 'test', 'wkrm53c591c780a8f', '300', 'testing again', '2014-07-18', '2014-07-23', '0', '0000-00-00', '0', 'N.A.'),
+(3, 'mil53c9140dc6968', 'Mockup creation', 'wkrm53c591c780a8f', '200', 'First thing you can do is simply start Ubuntu Software Center and get the Pepper Flash Player - browser plugin. The package name pepperflashplugin-nonfree has "nonfree" in the name because it refers to its ownership by Adobe Systems and free-speech qualities, not that it costs money. The browser may ask your permission to run "xdg-open" to launch Ubuntu Software Center.', '2014-07-24', '2014-07-31', '0', '0000-00-00', '0', 'N.A.');
 
 -- --------------------------------------------------------
 
@@ -716,7 +720,7 @@ CREATE TABLE IF NOT EXISTS `user_credentials` (
 --
 
 INSERT INTO `user_credentials` (`id`, `user_id`, `email_id`, `username`, `password`, `category`, `reset_pass_token`, `reset_pass_sent_addr`, `sign_in_count`, `last_sign_in_ip`, `date`, `status`) VALUES
-(13, 'user534fa645dc7d1', 'dipanjan@vyrazu.com', 'test', 'e10adc3949ba59abbe56e057f20f883e', 'employer', NULL, NULL, 56, '127.0.0.1', '2014-07-16 02:49:11', '1'),
+(13, 'user534fa645dc7d1', 'dipanjan@vyrazu.com', 'test', 'e10adc3949ba59abbe56e057f20f883e', 'employer', NULL, NULL, 58, '127.0.0.1', '2014-07-17 04:32:14', '1'),
 (14, 'user536103eece459', 'abcd@abc.com', 'dipa', 'b51e8dbebd4ba8a8f342190a4b9f08d7', 'employer', NULL, NULL, 28, '127.0.0.1', '2014-07-14 03:10:43', '1'),
 (15, 'user5368cebf96e8b', 'abcd@gmail.com', 'abcd', 'e80b5017098950fc58aad83c8c14978e', 'contractor', NULL, NULL, 32, '127.0.0.1', '2014-07-15 07:27:19', '1');
 
