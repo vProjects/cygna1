@@ -409,7 +409,7 @@ a:hover{
 	border: 1px solid #cdcdcd;
 }
 .profile_box_heading{
-	background-color: #eaeaea;
+	background-color: #ffffff;
 	padding:0.4em 0.6em;
 	color: #7a7575;
 	border-bottom:1px solid #cdcdcd;
@@ -560,7 +560,7 @@ a:hover{
 	margin-top:0;
 }
 .project_list_heading_bar{
-	background-color:#dfdfdf;
+	background-color: #ffffff;
 	color:#696363;
 	font-family:PTSans;
 	padding:0.4em 0.6em;
@@ -1650,4 +1650,13 @@ border-top-right-radius: 5px;
 	padding: 0px 8px;
 	font-size: 14px;
 	border-radius: 0;
+}
+.job_status_h {
+    color: #02b7dd;
+    font-size: 14px;
+    font-weight: bolder;
+    margin-right: 5px;
+}
+.job_status_aw {
+	color: #458B00;
 }

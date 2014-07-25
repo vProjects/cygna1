@@ -1686,15 +1686,36 @@
 		{
 			//get values from database
 			$projects = $this->manage_content->getValueMultipleCondtnDesc("project_info","*",array("user_id","status"),array($user_id,1));
+			
 			if(!empty($projects[0]))
 			{
 				foreach($projects as $project)
 				{
+					//get the award info
+					$award_info = $this->manage_content->getValue_where("award_info","*","project_id",$project['project_id']);
+					
 					echo '<div class="portfolio_part_outline">
                             <div class="col-md-12 col-sm-12 col-xs-12">
                                 <div class="portfolio_part_heading"><a href="userProjectDetails.php?pid='.$project['project_id'].'">'.$project['title'].' </a><span class="portfolio_part_share"><a href="edit_project.php?pid='.$project['project_id'].'">Edit</a></span></div>
                                 <p>'.substr($project['description'],0,500).'</p>
 								<p>Posted On: '.$project['date'].' | '.$project['time'].'</p>
+								<p><span class="job_status_h">Job Status:</span>';
+								if( !empty($award_info) )
+								{
+									if( $award_info[0]['is_accepted'] == 1 )
+									{
+										echo '<a href="userProjectDetails.php?pid='.$project['project_id'].'" class="job_status_h">Work in progress.</a>';
+									}
+									else
+									{
+										echo '<a href="userProjectDetails.php?pid='.$project['project_id'].'"  class="job_status_aw">Awaiting acceptance.</a>';
+									}
+								}
+								else
+								{
+									echo '<a href="userProjectDetails.php?pid='.$project['project_id'].'">Select a candidate.</a>';
+								}
+								echo '</p>
                             </div>
                             <div class="clearfix"></div>
                         </div>';
@@ -2882,6 +2903,9 @@
 			//get the bid info
 			$bid = $this->manage_content->getValue_where('bid_info','*','bid_id',$workroom[0]['bid_id']);
 			
+			//get the project info
+			$project = $this->manage_content->getValue_where('project_info','*','project_id',$workroom[0]['project_id']);
+			
 			if( !empty($milestones) )
 			{
 				//initialize the index
@@ -2896,17 +2920,25 @@
                         <td>'.$bid[0]['currency'].$milestone['amount'].'</td>
                         <td>';
 					
-					if( $milestone['funding_status'] != 1 )
+					if( ( $milestone['funding_status'] != 1) &&  ($project[0]['user_id'] == $_SESSION['user_id'])  )
 					{
 						echo '<button class="btn btn-sm btn-info">Fund</button> ';
+					}
+					elseif( ($milestone['funding_status'] == 0 ) )
+					{
+						echo '<button class="btn btn-sm btn-info">Request Fund</button> ';
 					}
 					else
 					{
 						echo '<button class="btn btn-sm btn-info" disabled>Funded</button> ';
 					}
-					if( $milestone['release_status'] != 1 )
+					if( $milestone['release_status'] != 1  &&  ($project[0]['user_id'] == $_SESSION['user_id']) )
 					{
 						echo '<button class="btn btn-sm btn-success">Release</button>';
+					}
+					elseif( ($milestone['release_status'] == 0 ) )
+					{
+						echo '<button class="btn btn-sm btn-success">Request Release</button>';
 					}
 					else
 					{
@@ -2940,6 +2972,105 @@
                         <td>N.A.</td>
                     </tr>';
 		 	}	
+		 }
+
+		/*
+		 * method to get the add milestone button
+		 * @creates the full UI with modal form
+		 * Auth Singh
+		 */
+		 public function getAddMilestone($wid)
+		 {
+		 	$milestones = $this->manage_content->getValue_where('milestone_info','*','workroom_id',$wid);
+			$workroom = $this->manage_content->getValue_where('workroom_info','*','workroom_id',$wid);
+			//get the bid info
+			$bid = $this->manage_content->getValue_where('bid_info','*','bid_id',$workroom[0]['bid_id']);
+			
+			//get the project info
+			$project = $this->manage_content->getValue_where('project_info','*','project_id',$workroom[0]['project_id']);			
+			
+			if( !empty($milestones) && !empty($bid) && !empty($project) )
+			{
+				if( $project[0]['user_id'] == $_SESSION['user_id'] )
+				{
+					//generate the full UI #BUTTON
+					echo '<div class="col-md-12">
+								<div class="add-milstone">
+									<button class="btn btn-default" data-toggle="modal" data-target=".milestone">Add milestone</button>
+								</div>
+							</div>
+                            <div class="clearfix"></div>';
+					//generate the full UI #MODAL
+					echo '<div class="modal fade milestone" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+							  <div class="modal-dialog">
+							      <div class="modal-content">
+							
+							        <div class="modal-header custom-hmodals">
+							          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							          <h4 class="modal-title" id="mySmallModalLabel">Create New Milestone</h4>
+							        </div>
+							        <div class="modal-body">
+										<form class="form-horizontal" action="v-includes/class.formData.php" method="post" role="form" enctype="multipart/form-data">
+											  <div class="form-group">
+												<label class="col-sm-5 control-label custom-chk">Milestone Name:</label>
+												<div class="col-sm-7">
+												  <input type="text" class="form-control" name="milestone_name" id="milestoneName" placeholder="Milestone Name">
+												</div>
+											  </div>
+											  <div class="form-group">
+												<label class="col-sm-5 control-label custom-chk">Milestone Description: </label>
+												<div class="col-sm-7">
+												 <textarea class="form-control" name="description" rows="2"></textarea>
+												</div>
+											  </div>
+											  <div class="form-group">
+												<label class="col-sm-5 control-label custom-chk">Milestone Amount:</label>
+												<div class="col-sm-7">
+												  <input type="text" class="form-control" name="amount" placeholder="Amount of the milestone">
+												</div>
+											  </div>
+											  <div class="form-group">
+												<label class="col-sm-5 control-label custom-chk">Start Date:</label>
+												<div class="col-sm-7">
+												  <input type="text" class="form-control" name="start_date" id="date_1" placeholder="Start Date">
+												</div>
+											  </div>
+											  <div class="form-group">
+												<label class="col-sm-5 control-label custom-chk">End Date:</label>
+												<div class="col-sm-7">
+												  <input type="text" class="form-control" name="end_date" id="date_2" placeholder="End Date">
+												</div>
+											  </div>
+												 <div class="form-group">
+													<div class="col-sm-offset-5 col-sm-7">
+													 <input type="hidden" name="fn" value="'.md5(createMilestone).'">
+													 <input type="hidden" value="'.$wid.'" name="wid" />
+													 <button class="btn btn-primary btn-add">Create Milestone</button>
+													</div>
+												</div>
+											</div>
+										</form>
+									</div>
+									<script type="text/javascript">';
+					echo "$('#date_1').datepick({
+											dateFormat: 'yyyy-mm-dd', 
+									    	minDate: new Date(),
+											maxDate: '+3m',
+											showTrigger: '#calImg'
+										});
+										
+										$('#date_2').datepick({
+											dateFormat: 'yyyy-mm-dd', 
+									    	minDate: new Date(),
+											maxDate: '+6m',
+											showTrigger: '#calImg'
+										});
+									</script>
+								</div><!-- /.modal-content -->
+							   </div>";
+					
+				}
+			}
 		 }
 	}
 	

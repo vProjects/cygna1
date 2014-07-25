@@ -58,7 +58,6 @@
 					{
 						echo '<div class="project_list_heading_bar">
 								<span class="pull-left">Project List</span>
-								
 								<div class="clearfix"></div>
 							</div>
 							<div class="profile_box_outline">
